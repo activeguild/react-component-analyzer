@@ -1,4 +1,3 @@
-import { AST_NODE_TYPES, parse } from '@typescript-eslint/typescript-estree'
 import type {
   BlockStatement,
   CallExpressionArgument,
@@ -10,7 +9,8 @@ import type {
   ProgramStatement,
   Statement,
   VariableDeclaration,
-} from '@typescript-eslint/typescript-estree/node_modules/@typescript-eslint/types/dist/ast-spec'
+} from '@typescript-eslint/types/dist/ast-spec'
+import { AST_NODE_TYPES, parse } from '@typescript-eslint/typescript-estree'
 import type { Link, Node } from 'beautiful-react-diagrams/@types/DiagramSchema'
 import chalk from 'chalk'
 import fs from 'fs'
