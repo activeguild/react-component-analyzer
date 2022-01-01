@@ -24,6 +24,7 @@
     "@projectstorm/react-diagrams": "^6.6.1",
     "@types/mini-css-extract-plugin": "^2.4.0",
     "@types/node": "^17.0.6",
+    "@types/react": "^17.0.38",
     "@types/webpack": "^5.28.0",
     "@typescript-eslint/eslint-plugin": "^5.8.1",
     "@typescript-eslint/parser": "^5.8.1",
