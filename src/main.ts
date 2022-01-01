@@ -47,7 +47,7 @@ export const main = async (fileName: string, aliasses: Alias[] = []) => {
       id: title,
       title,
       astType: AST_NODE_TYPES.ImportSpecifier,
-      content: fileName,
+      fileName,
       disableDrag: false,
       exportName: '',
       coordinates: [0, 0],
@@ -141,13 +141,13 @@ const analyze = (
   dir: string
 ) => {
   try {
-    const { content } = parentNode
+    const { fileName } = parentNode
     let code = ''
-    if (loadedFile.has(content)) {
-      code = loadedFile.get(content)
+    if (loadedFile.has(fileName)) {
+      code = loadedFile.get(fileName)
     } else {
-      code = fs.readFileSync(content).toString()
-      loadedFile.set(content, code)
+      code = fs.readFileSync(fileName).toString()
+      loadedFile.set(fileName, code)
     }
 
     const parseOptions = {
@@ -172,16 +172,16 @@ const analyze = (
     for (const childNode of parentNode.children) {
       // [Note]: Block circular references.
       if (
-        parentPath !== childNode.content &&
+        parentPath !== childNode.fileName &&
         childNode.exists &&
-        parentNode.content !== childNode.content
+        parentNode.fileName !== childNode.fileName
       ) {
         analyze(
           false,
           aliasses,
-          content,
+          fileName,
           childNode,
-          path.dirname(childNode.content)
+          path.dirname(childNode.fileName)
         )
       }
     }
@@ -229,7 +229,7 @@ const analyzeAst = (
               id: name,
               title: name,
               astType: AST_NODE_TYPES.VariableDeclarator,
-              content: parentNode.content,
+              fileName: parentNode.fileName,
               // default values
               exportName: name,
               coordinates: [0, 0],
@@ -312,7 +312,7 @@ const analyzeImport = (
         id,
         title: id,
         astType: type,
-        content: finalFilePath,
+        fileName: finalFilePath,
         exportName: local.name,
         // default values
         coordinates: [0, 0],
@@ -572,7 +572,7 @@ const updateExists = (
           id: name,
           astType: AST_NODE_TYPES.ImportSpecifier,
           title: name,
-          content: child.content,
+          fileName: child.fileName,
           exportName: name,
           coordinates: [0, 0],
           children: [],

@@ -11,6 +11,7 @@ export type Alias = {
 
 export type ExtentionNode = Node<unknown> & {
   title: string
+  fileName: string
   astType:
     | AST_NODE_TYPES.ImportDefaultSpecifier
     | AST_NODE_TYPES.ImportNamespaceSpecifier
