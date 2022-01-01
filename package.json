@@ -1,8 +1,8 @@
 {
-  "name": "visualize-react-component-tree",
+  "name": "visualize-react-component",
   "version": "1.0.0",
   "description": "Analyze the component tree of react and display it in a diagram.",
-  "main": "index.js",
+  "main": "cli.js",
   "scripts": {
     "build": "tsc --project tsconfig.json",
     "build:viewer": "webpack --mode production",
