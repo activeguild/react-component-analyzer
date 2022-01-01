@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/activeguild/visualize-react-component-tree.git"
+    "url": "git+https://github.com/activeguild/visualize-react-component.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/activeguild/visualize-react-component-tree/issues"
+    "url": "https://github.com/activeguild/visualize-react-component/issues"
   },
-  "homepage": "https://github.com/activeguild/visualize-react-component-tree#readme",
+  "homepage": "https://github.com/activeguild/visualize-react-component#readme",
   "devDependencies": {
     "@projectstorm/react-diagrams": "^6.6.1",
     "@types/mini-css-extract-plugin": "^2.4.0",
