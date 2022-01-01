@@ -1,0 +1,58 @@
+{
+  "name": "visualize-react-component-tree",
+  "version": "1.0.0",
+  "description": "Analyze the component tree of react and display it in a diagram.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "build:viewer": "webpack --mode production",
+    "cli": "node --require esbuild-register ./src/cli.ts",
+    "eslint": "eslint '**/*.{js,jsx,ts,tsx}' --ignore-path .gitignore",
+    "prettier": "prettier . --write"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/activeguild/visualize-react-component-tree.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/activeguild/visualize-react-component-tree/issues"
+  },
+  "homepage": "https://github.com/activeguild/visualize-react-component-tree#readme",
+  "devDependencies": {
+    "@projectstorm/react-diagrams": "^6.6.1",
+    "@types/mini-css-extract-plugin": "^2.4.0",
+    "@types/node": "^17.0.6",
+    "@types/webpack": "^5.28.0",
+    "@typescript-eslint/eslint-plugin": "^5.8.1",
+    "@typescript-eslint/parser": "^5.8.1",
+    "@typescript-eslint/typescript-estree": "^5.8.1",
+    "beautiful-react-diagrams": "^0.5.1",
+    "css-loader": "^6.5.1",
+    "esbuild": "^0.14.10",
+    "esbuild-loader": "^2.18.0",
+    "esbuild-register": "^3.3.1",
+    "eslint": "^8.6.0",
+    "eslint-config-prettier": "^8.3.0",
+    "fork-ts-checker-webpack-plugin": "^6.5.0",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.4.5",
+    "postcss-loader": "^6.2.1",
+    "prettier": "^2.5.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "sass-loader": "^12.4.0",
+    "style-loader": "^3.3.1",
+    "thread-loader": "^3.0.4",
+    "ts-loader": "^9.2.6",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1"
+  },
+  "dependencies": {
+    "chalk": "^5.0.0",
+    "commander": "^8.3.0"
+  }
+}
