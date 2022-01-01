@@ -21,7 +21,8 @@ const App = () => {
 }
 
 const CustomNode = (props: Node<Data>) => {
-  const { id, content, data } = props
+  const { id, data } = props
+  const { fileName } = data
 
   return (
     <div
@@ -50,13 +51,13 @@ const CustomNode = (props: Node<Data>) => {
       </div>
       <div style={{ textAlign: 'right' }}>
         <a
-          href={content}
+          href={fileName}
           onClick={(event) => {
             if (data) {
               const { loc } = data
-              location.href = `vscode://file/${content}:${loc.start.line}:${loc.start.column}`
+              location.href = `vscode://file/${fileName}:${loc.start.line}:${loc.start.column}`
             } else {
-              location.href = `vscode://file/${content}:1:1`
+              location.href = `vscode://file/${fileName}:1:1`
             }
             event.preventDefault()
           }}

@@ -27,6 +27,7 @@ export type LineColumn = { line: number; column: number }
 export type Loc = { start: LineColumn; end: LineColumn }
 export type Data = {
   title: string
+  fileName: string
   loc: Loc
 }
 

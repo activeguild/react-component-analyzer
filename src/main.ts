@@ -71,6 +71,7 @@ export const main = async (fileName: string, aliasses: Alias[] = []) => {
         coordinates: [x, y],
         data: {
           title: id,
+          fileName,
           loc: {
             start: { ...defaultLineColumn },
             end: { ...defaultLineColumn },
@@ -106,7 +107,7 @@ const convertToFinalNode = (
   const { children } = parentNode
 
   for (const child of children) {
-    const { id, content, disableDrag, exists, loc } = child
+    const { id, content, disableDrag, exists, loc, fileName } = child
     if (exists) {
       const findedNode = nodes.find((node) => node.id === id)
       if (!findedNode) {
@@ -122,7 +123,7 @@ const convertToFinalNode = (
           content,
           disableDrag,
           coordinates: [x, y],
-          data: { title: id, loc },
+          data: { title: id, fileName, loc },
         })
         x = convertToFinalNode(child, nodes, links, x, y + NEXT_NODE_POSITION_Y)
       }
