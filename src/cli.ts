@@ -6,7 +6,12 @@ import { main } from './main'
 program.parse(process.argv)
 
 if (program.args[0]) {
+  let config = null
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const json = require(path.resolve(path.resolve(), 'virot.config.js'))
-  main(program.args[0], json.alias)
+  try {
+    config = require(path.resolve(path.resolve(), 'virot.config.js'))
+  } catch (event) {
+    console.log(event)
+  }
+  main(program.args[0], config || [])
 }
