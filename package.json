@@ -10,6 +10,9 @@
     "eslint": "eslint '**/*.{js,jsx,ts,tsx}' --ignore-path .gitignore",
     "prettier": "prettier . --write"
   },
+  "bin": {
+    "virot": "dist/cli.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/activeguild/visualize-react-component.git"
