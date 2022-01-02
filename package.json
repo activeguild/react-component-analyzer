@@ -15,7 +15,7 @@
     "url": "git+https://github.com/activeguild/visualize-react-component.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/activeguild/visualize-react-component/issues"
   },
