@@ -14,6 +14,15 @@
     "type": "git",
     "url": "git+https://github.com/activeguild/visualize-react-component.git"
   },
+  "keywords": [
+    "typescript",
+    "visualize",
+    "react",
+    "component",
+    "tree",
+    "diagram",
+    "analyze"
+  ],
   "author": "j1ngzoue",
   "license": "MIT",
   "bugs": {
