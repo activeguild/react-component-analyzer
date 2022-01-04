@@ -37,13 +37,15 @@ let diagramHeight = 0
 const loadedFile = new Map<string, string>()
 const defaultLineColumn: LineColumn = { line: 1, column: 1 }
 
-export const main = async (
-  fileName: string,
-  config: Config = { vscode: true, alias: [] }
-) => {
+export const main = async (fileName: string, config: Config) => {
   try {
     if (!path.isAbsolute(fileName)) {
       fileName = path.resolve(path.resolve(), fileName)
+    }
+
+    if (config) {
+      config.vscode = config.vscode === undefined ? true : config.vscode
+      config.alias = config.alias || []
     }
     const title = path.basename(fileName).replace(/\.[^/.]+$/, '')
 
