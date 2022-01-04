@@ -4,7 +4,8 @@
   "description": "Analyze the component tree of react and display it in a diagram.",
   "main": "cli.js",
   "scripts": {
-    "build": "tsc --project tsconfig.json",
+    "build": "npm run build:cli && npm run build:viewer",
+    "build:cli": "tsc --project tsconfig.json",
     "build:viewer": "webpack --mode production",
     "cli": "node --require esbuild-register ./src/cli.ts",
     "eslint": "eslint '**/*.{js,jsx,ts,tsx}' --ignore-path .gitignore",
