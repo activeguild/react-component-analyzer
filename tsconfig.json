@@ -8,7 +8,8 @@
     "baseUrl": "./src",
     "outDir": "./dist",
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "strict": true
   },
   "include": ["src"],
   "exclude": ["webpack.config.ts"]
