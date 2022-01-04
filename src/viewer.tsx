@@ -79,12 +79,22 @@ const useDrawer = (initialValue = false) => {
         return
       }
 
-      if (code !== newCode) {
-        setCode(newCode)
-        setState(true)
-      } else {
-        setState((prevState) => !prevState)
-      }
+      setCode((prevCode) => {
+        if (prevCode !== newCode) {
+          setState(true)
+          return newCode
+        } else {
+          setState((prevState) => !prevState)
+          return ''
+        }
+      })
+
+      // if (code !== newCode) {
+      //   setCode(newCode)
+      //   setState(true)
+      // } else {
+      //   setState((prevState) => !prevState)
+      // }
     },
     [code, state]
   )
