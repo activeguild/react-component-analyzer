@@ -4,7 +4,7 @@ import path from 'path'
 import { CustomSchema } from './types'
 
 export const writeHtml = (diagram: CustomSchema): void => {
-  const outputFilePath = path.resolve(__dirname, '../dist/stats.html')
+  const outputFilePath = path.resolve(path.resolve(), '../stats.html')
   writeFileSync(outputFilePath, getHtml(diagram))
   console.log(chalk.green(`Success. ${outputFilePath}`))
   return
