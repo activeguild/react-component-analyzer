@@ -1,10 +1,10 @@
 {
   "name": "visualize-react-component",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Analyze the component tree of react and display it in a diagram.",
   "main": "cli.js",
   "scripts": {
-    "build": "npm run build:cli && npm run build:viewer",
+    "build": "npm run build:cli && npm run build:viewer && cp -r ./vendor ./dist",
     "build:cli": "tsc --project tsconfig.json",
     "build:viewer": "webpack --mode production",
     "cli": "node --require esbuild-register ./src/cli.ts",
