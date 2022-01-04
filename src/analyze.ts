@@ -49,6 +49,7 @@ export const analyze = (
     }
 
     const { code, ast } = loadedFile
+    parentNode.code = code
     const defaultDeclarationName = findDefaultDeclarationName(ast.body)
     if (
       defaultDeclarationName &&
@@ -59,7 +60,7 @@ export const analyze = (
 
     for (const state of ast.body) {
       if (!state.type.startsWith('TS')) {
-        analyzeAst(root, alias, parentNode, dir, state)
+        analyzeAst(root, alias, parentNode, dir, state, code)
       }
     }
 
@@ -90,10 +91,11 @@ const analyzeAst = (
   alias: Alias[],
   parentNode: ExtentionNode,
   dir: string,
-  body: ProgramStatement
+  body: ProgramStatement,
+  code: string
 ) => {
   if (body.type === AST_NODE_TYPES.ImportDeclaration) {
-    analyzeImport(alias, parentNode, dir, body)
+    analyzeImport(alias, parentNode, dir, body, code)
   } else if (body.type === AST_NODE_TYPES.FunctionDeclaration) {
     if (
       parentNode.astType !== AST_NODE_TYPES.ImportDefaultSpecifier ||
@@ -123,6 +125,7 @@ const analyzeAst = (
           if (declaration.init.body.type === AST_NODE_TYPES.JSXElement) {
             parentNode.children.push({
               id: name,
+              code,
               title: name,
               astType: AST_NODE_TYPES.VariableDeclarator,
               fileName: parentNode.fileName,
@@ -179,7 +182,8 @@ const analyzeImport = (
   alias: Alias[],
   parentNode: ExtentionNode,
   dir: string,
-  importDec: ImportDeclaration
+  importDec: ImportDeclaration,
+  code: string
 ) => {
   if (importDec.importKind === 'type') return
   const filePath = resolveAlias(alias, dir, importDec)
@@ -211,6 +215,7 @@ const analyzeImport = (
     if (id) {
       parentNode.children.push({
         id,
+        code: '',
         title: id,
         astType: type,
         fileName: finalFilePath,
@@ -482,6 +487,7 @@ const updateExists = (
         const { name } = openingElm.name.property
         const childFromProperty: ExtentionNode = {
           id: name,
+          code: '',
           astType: AST_NODE_TYPES.ImportSpecifier,
           title: name,
           fileName: child.fileName,

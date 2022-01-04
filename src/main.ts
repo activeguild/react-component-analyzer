@@ -35,6 +35,7 @@ export const main = async (fileName: string, config: Config) => {
 
     const parentNode: ExtentionNode = {
       id: title,
+      code: '',
       title,
       astType: AST_NODE_TYPES.ImportSpecifier,
       fileName,
@@ -59,13 +60,14 @@ export const main = async (fileName: string, config: Config) => {
 
     const x = NODE_MARGIN,
       y = NODE_MARGIN
-    const { id, content } = parentNode
+    const { id, content, code } = parentNode
     const nodes: Node<Data>[] = [
       {
         id,
         content,
         coordinates: [x, y],
         data: {
+          code,
           title: id,
           fileName,
           loc: {
@@ -104,7 +106,7 @@ const convertToFinalNode = (
   const { children } = parentNode
 
   for (const child of children) {
-    const { id, content, disableDrag, exists, loc, fileName } = child
+    const { id, code, content, disableDrag, exists, loc, fileName } = child
     if (exists) {
       const findedNode = nodes.find((node) => node.id === id)
       if (!findedNode) {
@@ -120,7 +122,7 @@ const convertToFinalNode = (
           content,
           disableDrag,
           coordinates: [x, y],
-          data: { title: id, fileName, loc },
+          data: { code, title: id, fileName, loc },
         })
         x = convertToFinalNode(child, nodes, links, x, y + NEXT_NODE_POSITION_Y)
       }

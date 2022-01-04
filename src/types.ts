@@ -16,6 +16,7 @@ export type Alias = {
 
 export type ExtentionNode = Node<unknown> & {
   title: string
+  code: string
   fileName: string
   astType:
     | AST_NODE_TYPES.ImportDefaultSpecifier
@@ -40,9 +41,11 @@ export type LineColumn = { line: number; column: number }
 export type Loc = { start: LineColumn; end: LineColumn }
 export type Data = {
   vscode?: boolean
+  code: string
   title: string
   fileName: string
   loc: Loc
+  handleShowDetail?: React.MouseEventHandler<HTMLAnchorElement>
 }
 
 export type CustomDiagram = {
