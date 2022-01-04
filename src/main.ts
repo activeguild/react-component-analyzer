@@ -15,6 +15,7 @@ import type { Link, Node } from 'beautiful-react-diagrams/@types/DiagramSchema'
 import chalk from 'chalk'
 import fs from 'fs'
 import path from 'path'
+import { resolveFinalConfig } from './config'
 import {
   EXTENTIONS,
   NEXT_NODE_POSITION_X,
@@ -43,15 +44,8 @@ export const main = async (fileName: string, config: Config) => {
       fileName = path.resolve(path.resolve(), fileName)
     }
 
-    const finalConfig: Required<Config> = {
-      vscode: true,
-      alias: [],
-    }
+    const finalConfig: Required<Config> = resolveFinalConfig(config)
 
-    if (config) {
-      finalConfig.vscode = config.vscode === undefined ? true : config.vscode
-      finalConfig.alias = config.alias || []
-    }
     const title = path.basename(fileName).replace(/\.[^/.]+$/, '')
 
     const parentNode: ExtentionNode = {
