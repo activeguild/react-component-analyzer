@@ -23,6 +23,7 @@ import {
 } from './constants'
 import type {
   Alias,
+  Config,
   CustomSchema,
   Data,
   ExtentionNode,
@@ -36,7 +37,7 @@ let diagramHeight = 0
 const loadedFile = new Map<string, string>()
 const defaultLineColumn: LineColumn = { line: 1, column: 1 }
 
-export const main = async (fileName: string, aliasses: Alias[] = []) => {
+export const main = async (fileName: string, config: Config) => {
   try {
     if (!path.isAbsolute(fileName)) {
       fileName = path.resolve(path.resolve(), fileName)
@@ -59,7 +60,13 @@ export const main = async (fileName: string, aliasses: Alias[] = []) => {
       },
     }
 
-    analyze(true, aliasses, fileName, parentNode, path.dirname(fileName))
+    analyze(
+      true,
+      config.alias || [],
+      fileName,
+      parentNode,
+      path.dirname(fileName)
+    )
 
     const x = NODE_MARGIN,
       y = NODE_MARGIN

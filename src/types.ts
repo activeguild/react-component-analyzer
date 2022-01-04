@@ -4,6 +4,10 @@ import type {
   Node,
 } from 'beautiful-react-diagrams/@types/DiagramSchema'
 
+export type Config = {
+  alias?: Alias[]
+}
+
 export type Alias = {
   find: string
   replacement: string

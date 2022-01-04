@@ -19,5 +19,5 @@ if (program.args[0]) {
       )
     )
   }
-  main(program.args[0], config || [])
+  main(program.args[0], config || {})
 }
