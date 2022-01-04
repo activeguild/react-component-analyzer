@@ -8,7 +8,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { FaExternalLinkAlt } from 'react-icons/fa'
 import { NODE_HEIGHT, NODE_WIDTH } from './constants'
-import type { CustomSchema, Data } from './types'
+import type { CustomDiagram as CustomDiagramType, Data } from './types'
 
 const App = () => {
   const initialSchema = createSchema(diagram.schema)
@@ -17,7 +17,7 @@ const App = () => {
     node.render = CustomNode
   }
 
-  return <CustomDiagram customSchema={diagram} initialSchema={initialSchema} />
+  return <CustomDiagram customDiagram={diagram} initialSchema={initialSchema} />
 }
 
 const CustomNode = (props: Node<Data>) => {
@@ -70,10 +70,10 @@ const CustomNode = (props: Node<Data>) => {
 }
 
 const CustomDiagram = ({
-  customSchema,
+  customDiagram,
   initialSchema,
 }: {
-  customSchema: CustomSchema
+  customDiagram: CustomDiagramType
   initialSchema: DiagramSchema<Data>
 }) => {
   const [schema, { onChange }] = useSchema(initialSchema)
@@ -81,8 +81,8 @@ const CustomDiagram = ({
   return (
     <div
       style={{
-        height: `${customSchema.height}px`,
-        width: `${customSchema.width}px`,
+        height: `${customDiagram.height}px`,
+        width: `${customDiagram.width}px`,
       }}
     >
       <Diagram schema={schema} onChange={onChange} />
