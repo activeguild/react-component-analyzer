@@ -31,12 +31,14 @@ export type ExtentionNode = Node<unknown> & {
 export type LineColumn = { line: number; column: number }
 export type Loc = { start: LineColumn; end: LineColumn }
 export type Data = {
+  vscode?: boolean
   title: string
   fileName: string
   loc: Loc
 }
 
 export type CustomDiagram = {
+  vscode: boolean
   width: number
   height: number
   schema: DiagramSchema<Data>

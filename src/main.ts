@@ -89,6 +89,7 @@ export const main = async (fileName: string, config: Config) => {
     convertToFinalNode(parentNode, nodes, links, x, y + NEXT_NODE_POSITION_Y)
 
     const diagram: CustomDiagram = {
+      vscode: config.vscode,
       width: diagramWidth + NEXT_NODE_POSITION_X,
       height: diagramHeight + NEXT_NODE_POSITION_Y,
       schema: {
