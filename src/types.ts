@@ -5,6 +5,7 @@ import type {
 } from 'beautiful-react-diagrams/@types/DiagramSchema'
 
 export type Config = {
+  vscode?: boolean
   alias?: Alias[]
 }
 
