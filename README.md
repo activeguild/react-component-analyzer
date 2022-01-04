@@ -7,8 +7,7 @@
 ## visualize-react-component
 
 Analyze the component tree of react and display it in a diagram.
-
-![スクリーンショット 2022-01-02 3 53 37](https://user-images.githubusercontent.com/39351982/147858017-5545345b-ab53-42d0-92a9-41b7d72c7a54.png)
+![react-component](https://user-images.githubusercontent.com/39351982/148112626-4f5ed09c-0281-4763-b48c-c8b6d2a47969.gif)
 
 ## Motivation
 
