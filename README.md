@@ -15,6 +15,11 @@ Analyze the component tree of react and display it in a diagram.
 It plays an auxiliary role in visualizing the component design during implementation and activating smooth discussions.
 It will lead to shrinking the cost of development.
 
+## Future plans
+
+- [ ] Vite alias resolution.
+- [ ] Code viewer in browser.
+
 ## Install
 
 ```bash
