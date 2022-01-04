@@ -88,13 +88,6 @@ const useDrawer = (initialValue = false) => {
           return ''
         }
       })
-
-      // if (code !== newCode) {
-      //   setCode(newCode)
-      //   setState(true)
-      // } else {
-      //   setState((prevState) => !prevState)
-      // }
     },
     [code, state]
   )
