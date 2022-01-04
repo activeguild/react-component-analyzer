@@ -41,6 +41,7 @@ export const analyze = (
       }
       const ast = parse(code, parseOptions)
       loadedFileMap.set(fileName, { code, ast })
+      loadedFile = { code, ast }
     }
 
     if (!loadedFile) {
