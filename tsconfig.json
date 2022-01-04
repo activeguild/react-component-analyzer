@@ -98,5 +98,5 @@
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
   },
   "include": ["src"],
-  "exclude": ["webpack.config.ts"]
+  "exclude": ["webpack.config.ts", "src/viewer.tsx"]
 }
