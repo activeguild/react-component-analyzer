@@ -7,4 +7,4 @@ tsconfig.json
 webpack.config.ts
 .eslintrc.js
 .prettierrc.js
-vendor
+./vendor
