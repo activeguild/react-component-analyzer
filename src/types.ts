@@ -1,4 +1,4 @@
-import type { AST_NODE_TYPES } from '@typescript-eslint/typescript-estree'
+import type { AST, AST_NODE_TYPES } from '@typescript-eslint/typescript-estree'
 import type {
   DiagramSchema,
   Node,
@@ -26,6 +26,14 @@ export type ExtentionNode = Node<unknown> & {
   children: ExtentionNode[]
   exists: boolean
   loc: { start: LineColumn; end: LineColumn }
+}
+
+export type LoadedFile = {
+  code: string
+  ast: AST<{
+    loc: true
+    jsx: true
+  }>
 }
 
 export type LineColumn = { line: number; column: number }

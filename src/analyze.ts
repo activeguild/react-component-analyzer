@@ -16,10 +16,10 @@ import fs from 'fs'
 import path from 'path'
 import { resolveAlias } from './config'
 import { EXTENTIONS } from './constants'
-import { Alias, ExtentionNode, LineColumn } from './types'
+import { Alias, ExtentionNode, LineColumn, LoadedFile } from './types'
 
 const defaultLineColumn: LineColumn = { line: 1, column: 1 }
-const loadedFile = new Map<string, string>()
+const loadedFileMap = new Map<string, LoadedFile>()
 
 export const analyze = (
   root: boolean,
@@ -30,23 +30,24 @@ export const analyze = (
 ) => {
   try {
     const { fileName } = parentNode
-    let code: string | undefined = ''
-    if (loadedFile.has(fileName)) {
-      code = loadedFile.get(fileName)
+    let loadedFile: LoadedFile | undefined
+    if (loadedFileMap.has(fileName)) {
+      loadedFile = loadedFileMap.get(fileName)
     } else {
-      code = fs.readFileSync(fileName).toString()
-      loadedFile.set(fileName, code)
+      const code = fs.readFileSync(fileName).toString()
+      const parseOptions = {
+        loc: true,
+        jsx: true,
+      }
+      const ast = parse(code, parseOptions)
+      loadedFileMap.set(fileName, { code, ast })
     }
 
-    if (!code) {
+    if (!loadedFile) {
       return
     }
 
-    const parseOptions = {
-      loc: true,
-      jsx: true,
-    }
-    const ast = parse(code, parseOptions)
+    const { code, ast } = loadedFile
     const defaultDeclarationName = findDefaultDeclarationName(ast.body)
     if (
       defaultDeclarationName &&
