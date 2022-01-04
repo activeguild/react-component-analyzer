@@ -1,6 +1,6 @@
 {
   "name": "visualize-react-component",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Analyze the component tree of react and display it in a diagram.",
   "main": "cli.js",
   "scripts": {
@@ -10,12 +10,24 @@
     "eslint": "eslint '**/*.{js,jsx,ts,tsx}' --ignore-path .gitignore",
     "prettier": "prettier . --write"
   },
+  "bin": {
+    "virot": "dist/cli.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/activeguild/visualize-react-component.git"
   },
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "typescript",
+    "visualize",
+    "react",
+    "component",
+    "tree",
+    "diagram",
+    "analyze"
+  ],
+  "author": "j1ngzoue",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/activeguild/visualize-react-component/issues"
   },
@@ -53,7 +65,7 @@
     "webpack-cli": "^4.9.1"
   },
   "dependencies": {
-    "chalk": "^5.0.0",
+    "chalk": "^4.1.2",
     "commander": "^8.3.0",
     "react-icons": "^4.3.1"
   }

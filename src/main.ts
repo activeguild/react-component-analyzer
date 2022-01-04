@@ -23,6 +23,7 @@ import {
 } from './constants'
 import type {
   Alias,
+  Config,
   CustomSchema,
   Data,
   ExtentionNode,
@@ -36,10 +37,15 @@ let diagramHeight = 0
 const loadedFile = new Map<string, string>()
 const defaultLineColumn: LineColumn = { line: 1, column: 1 }
 
-export const main = async (fileName: string, aliasses: Alias[] = []) => {
+export const main = async (fileName: string, config: Config) => {
   try {
     if (!path.isAbsolute(fileName)) {
       fileName = path.resolve(path.resolve(), fileName)
+    }
+
+    if (config) {
+      config.vscode = config.vscode === undefined ? true : config.vscode
+      config.alias = config.alias || []
     }
     const title = path.basename(fileName).replace(/\.[^/.]+$/, '')
 
@@ -59,7 +65,7 @@ export const main = async (fileName: string, aliasses: Alias[] = []) => {
       },
     }
 
-    analyze(true, aliasses, fileName, parentNode, path.dirname(fileName))
+    analyze(true, config.alias, fileName, parentNode, path.dirname(fileName))
 
     const x = NODE_MARGIN,
       y = NODE_MARGIN
@@ -136,7 +142,7 @@ const convertToFinalNode = (
 
 const analyze = (
   root: boolean,
-  aliasses: Alias[],
+  alias: Alias[],
   parentPath: string,
   parentNode: ExtentionNode,
   dir: string
@@ -166,7 +172,7 @@ const analyze = (
 
     for (const state of ast.body) {
       if (!state.type.startsWith('TS')) {
-        analyzeAst(root, aliasses, parentNode, dir, state)
+        analyzeAst(root, alias, parentNode, dir, state)
       }
     }
 
@@ -179,7 +185,7 @@ const analyze = (
       ) {
         analyze(
           false,
-          aliasses,
+          alias,
           fileName,
           childNode,
           path.dirname(childNode.fileName)
@@ -194,13 +200,13 @@ const analyze = (
 
 const analyzeAst = (
   root: boolean,
-  aliasses: Alias[],
+  alias: Alias[],
   parentNode: ExtentionNode,
   dir: string,
   body: ProgramStatement
 ) => {
   if (body.type === AST_NODE_TYPES.ImportDeclaration) {
-    analyzeImport(aliasses, parentNode, dir, body)
+    analyzeImport(alias, parentNode, dir, body)
   } else if (body.type === AST_NODE_TYPES.FunctionDeclaration) {
     if (
       parentNode.astType !== AST_NODE_TYPES.ImportDefaultSpecifier ||
@@ -276,13 +282,13 @@ const analyzeVariableDeclaration = (
 }
 
 const analyzeImport = (
-  aliasses: Alias[],
+  alias: Alias[],
   parentNode: ExtentionNode,
   dir: string,
   importDec: ImportDeclaration
 ) => {
   if (importDec.importKind === 'type') return
-  const filePath = resolveAlias(aliasses, dir, importDec)
+  const filePath = resolveAlias(alias, dir, importDec)
   const fileName = path.basename(filePath)
   const { filePath: finalFilePath, existsFile } = findAnalyzeFilePath(filePath)
   let id: string | undefined = null
@@ -592,12 +598,11 @@ const updateExists = (
 }
 
 const resolveAlias = (
-  aliasses: Alias[],
+  alias: Alias[],
   dir: string,
   importDec: ImportDeclaration
 ) => {
-  for (const alias of aliasses) {
-    const { find, replacement } = alias
+  for (const { find, replacement } of alias) {
     if (importDec.source.value.startsWith(find)) {
       const replaced = importDec.source.value.replace(find, replacement)
 
