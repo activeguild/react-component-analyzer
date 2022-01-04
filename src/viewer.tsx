@@ -85,7 +85,7 @@ const CustomDiagram = ({
   customDiagram: CustomDiagramType
   initialSchema: DiagramSchema<Data>
 }) => {
-  const [schema, { onChange }] = useSchema<Data>(initialSchema)
+  const [schema, { onChange }] = useSchema<any>(initialSchema)
 
   return (
     <div
