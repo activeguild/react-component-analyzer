@@ -43,9 +43,14 @@ export const main = async (fileName: string, config: Config) => {
       fileName = path.resolve(path.resolve(), fileName)
     }
 
+    const finalConfig: Required<Config> = {
+      vscode: true,
+      alias: [],
+    }
+
     if (config) {
-      config.vscode = config.vscode === undefined ? true : config.vscode
-      config.alias = config.alias || []
+      finalConfig.vscode = config.vscode === undefined ? true : config.vscode
+      finalConfig.alias = config.alias || []
     }
     const title = path.basename(fileName).replace(/\.[^/.]+$/, '')
 
@@ -65,7 +70,13 @@ export const main = async (fileName: string, config: Config) => {
       },
     }
 
-    analyze(true, config.alias, fileName, parentNode, path.dirname(fileName))
+    analyze(
+      true,
+      finalConfig.alias,
+      fileName,
+      parentNode,
+      path.dirname(fileName)
+    )
 
     const x = NODE_MARGIN,
       y = NODE_MARGIN
@@ -89,7 +100,7 @@ export const main = async (fileName: string, config: Config) => {
     convertToFinalNode(parentNode, nodes, links, x, y + NEXT_NODE_POSITION_Y)
 
     const diagram: CustomDiagram = {
-      vscode: config.vscode,
+      vscode: finalConfig.vscode,
       width: diagramWidth + NEXT_NODE_POSITION_X,
       height: diagramHeight + NEXT_NODE_POSITION_Y,
       schema: {
@@ -150,12 +161,16 @@ const analyze = (
 ) => {
   try {
     const { fileName } = parentNode
-    let code = ''
+    let code: string | undefined = ''
     if (loadedFile.has(fileName)) {
       code = loadedFile.get(fileName)
     } else {
       code = fs.readFileSync(fileName).toString()
       loadedFile.set(fileName, code)
+    }
+
+    if (!code) {
+      return
     }
 
     const parseOptions = {
@@ -212,6 +227,7 @@ const analyzeAst = (
     if (
       parentNode.astType !== AST_NODE_TYPES.ImportDefaultSpecifier ||
       (parentNode.astType === AST_NODE_TYPES.ImportDefaultSpecifier &&
+        body.id &&
         body.id.name === parentNode.id)
     )
       analyzeBlockStatement(parentNode, body.body)
@@ -229,8 +245,9 @@ const analyzeAst = (
       if (declaration.id.type === AST_NODE_TYPES.Identifier) {
         const { name } = declaration.id
         if (
-          declaration.init.type === AST_NODE_TYPES.ArrowFunctionExpression ||
-          declaration.init.type === AST_NODE_TYPES.FunctionExpression
+          declaration.init &&
+          (declaration.init.type === AST_NODE_TYPES.ArrowFunctionExpression ||
+            declaration.init.type === AST_NODE_TYPES.FunctionExpression)
         ) {
           if (declaration.init.body.type === AST_NODE_TYPES.JSXElement) {
             parentNode.children.push({
@@ -256,7 +273,10 @@ const analyzeAst = (
       }
     }
   } else if (body.type === AST_NODE_TYPES.ExportNamedDeclaration) {
-    if (body.declaration.type === AST_NODE_TYPES.VariableDeclaration) {
+    if (
+      body.declaration &&
+      body.declaration.type === AST_NODE_TYPES.VariableDeclaration
+    ) {
       analyzeVariableDeclaration(parentNode, body.declaration)
     }
   }
@@ -276,7 +296,9 @@ const analyzeVariableDeclaration = (
         parentNode.exportName === ''
       ) {
         parentNode.loc = _declaration.id.loc
-        analyzeExpression(parentNode, _declaration.init)
+        if (_declaration.init) {
+          analyzeExpression(parentNode, _declaration.init)
+        }
       }
     }
   }
@@ -292,7 +314,7 @@ const analyzeImport = (
   const filePath = resolveAlias(alias, dir, importDec)
   const fileName = path.basename(filePath)
   const { filePath: finalFilePath, existsFile } = findAnalyzeFilePath(filePath)
-  let id: string | undefined = null
+  let id: string | null = null
 
   if (!existsFile) {
     return
@@ -370,7 +392,9 @@ const analyzeExpression = (
   } else if (elm.type === AST_NODE_TYPES.ClassExpression) {
     // todo
   } else if (elm.type === AST_NODE_TYPES.ImportExpression) {
-    analyzeExpression(parentNode, elm.attributes)
+    if (elm.attributes) {
+      analyzeExpression(parentNode, elm.attributes)
+    }
   } else if (elm.type === AST_NODE_TYPES.MemberExpression) {
     analyzeExpression(parentNode, elm.object)
   } else if (elm.type === AST_NODE_TYPES.NewExpression) {
@@ -381,8 +405,10 @@ const analyzeExpression = (
   } else if (elm.type === AST_NODE_TYPES.ObjectExpression) {
     for (const property of elm.properties) {
       if (property.type === AST_NODE_TYPES.MethodDefinition) {
-        for (const decorator of property.decorators) {
-          analyzeExpression(parentNode, decorator.expression)
+        if (property.decorators) {
+          for (const decorator of property.decorators) {
+            analyzeExpression(parentNode, decorator.expression)
+          }
         }
         if (property.value.type === AST_NODE_TYPES.FunctionExpression) {
           analyzeExpression(parentNode, property.value)
@@ -471,10 +497,14 @@ const analyzeStatement = (parentNode: ExtentionNode, statement: Statement) => {
   } else if (statement.type === AST_NODE_TYPES.FunctionDeclaration) {
     analyzeBlockStatement(parentNode, statement.body)
   } else if (statement.type === AST_NODE_TYPES.IfStatement) {
-    analyzeStatement(parentNode, statement.alternate)
+    if (statement.alternate) {
+      analyzeStatement(parentNode, statement.alternate)
+    }
     analyzeStatement(parentNode, statement.consequent)
   } else if (statement.type === AST_NODE_TYPES.ReturnStatement) {
-    analyzeExpression(parentNode, statement.argument)
+    if (statement.argument) {
+      analyzeExpression(parentNode, statement.argument)
+    }
   } else if (statement.type === AST_NODE_TYPES.SwitchStatement) {
     for (const cs of statement.cases) {
       for (const con of cs.consequent) {
@@ -483,10 +513,14 @@ const analyzeStatement = (parentNode: ExtentionNode, statement: Statement) => {
     }
   } else if (statement.type === AST_NODE_TYPES.TryStatement) {
     analyzeBlockStatement(parentNode, statement.block)
-    analyzeBlockStatement(parentNode, statement.finalizer)
+    if (statement.finalizer) {
+      analyzeBlockStatement(parentNode, statement.finalizer)
+    }
   } else if (statement.type === AST_NODE_TYPES.VariableDeclaration) {
     for (const declaration of statement.declarations) {
-      analyzeExpression(parentNode, declaration.init)
+      if (declaration.init) {
+        analyzeExpression(parentNode, declaration.init)
+      }
     }
   } else if (statement.type === AST_NODE_TYPES.WhileStatement) {
     analyzeStatement(parentNode, statement.body)

@@ -4,7 +4,7 @@ import type {
   Node,
 } from 'beautiful-react-diagrams/@types/DiagramSchema'
 import 'beautiful-react-diagrams/styles.css'
-import React from 'react'
+import React, { ElementType, ReactNode } from 'react'
 import ReactDOM from 'react-dom'
 import { FaExternalLinkAlt } from 'react-icons/fa'
 import { NODE_HEIGHT, NODE_WIDTH } from './constants'
@@ -14,15 +14,21 @@ const App = () => {
   const initialSchema = createSchema(diagram.schema)
 
   for (const node of initialSchema.nodes) {
+    if (node.data) {
+      node.data.vscode = diagram.vscode
+    }
     node.render = CustomNode
   }
 
   return <CustomDiagram customDiagram={diagram} initialSchema={initialSchema} />
 }
 
-const CustomNode = (props: Node<Data>) => {
+type CustomNodeType = (
+  props: Omit<Node<Data>, 'coordinates'>
+) => ElementType | ReactNode
+
+const CustomNode: CustomNodeType = (props) => {
   const { id, data } = props
-  const { vscode, fileName } = data
 
   return (
     <div
@@ -50,16 +56,15 @@ const CustomNode = (props: Node<Data>) => {
         {data ? data.title : id}
       </div>
       <div style={{ textAlign: 'right' }}>
-        {vscode ? (
+        {data && data.vscode ? (
           <a
-            href={fileName}
+            href={data ? data.fileName : ''}
             onClick={(event) => {
-              if (data) {
-                const { loc } = data
-                location.href = `vscode://file/${fileName}:${loc.start.line}:${loc.start.column}`
-              } else {
-                location.href = `vscode://file/${fileName}:1:1`
-              }
+              const { loc } = data
+              location.href = `vscode://file/${data ? data.fileName : ''}:${
+                loc.start.line
+              }:${loc.start.column}`
+
               event.preventDefault()
             }}
           >
@@ -80,7 +85,7 @@ const CustomDiagram = ({
   customDiagram: CustomDiagramType
   initialSchema: DiagramSchema<Data>
 }) => {
-  const [schema, { onChange }] = useSchema(initialSchema)
+  const [schema, { onChange }] = useSchema<Data>(initialSchema)
 
   return (
     <div
