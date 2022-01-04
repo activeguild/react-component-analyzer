@@ -15,6 +15,10 @@ Analyze the component tree of react and display it in a diagram.
 It plays an auxiliary role in visualizing the component design during implementation and activating smooth discussions.
 It will lead to shrinking the cost of development.
 
+## Point
+- Using the popular library, [@typescript-eslint/typescript-estree](https://github.com/typescript-eslint/typescript-eslint/tree/main/packages/typescript-estree) AST to do the analysis.
+- By using VSCode's schema in the Browser, you can quickly check the implementation of components you are interested in.
+
 ## Future plans
 
 - [ ] Vite alias resolution.
