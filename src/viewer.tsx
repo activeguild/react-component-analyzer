@@ -14,6 +14,7 @@ const App = () => {
   const initialSchema = createSchema(diagram.schema)
 
   for (const node of initialSchema.nodes) {
+    node.data.vscode = diagram.vscode
     node.render = CustomNode
   }
 
@@ -23,6 +24,7 @@ const App = () => {
 const CustomNode = (props: Node<Data>) => {
   const { id, data } = props
   const { vscode, fileName } = data
+  console.log('vscode :>> ', vscode)
 
   return (
     <div
