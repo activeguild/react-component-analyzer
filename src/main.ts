@@ -24,7 +24,7 @@ import {
 import type {
   Alias,
   Config,
-  CustomSchema,
+  CustomDiagram,
   Data,
   ExtentionNode,
   LineColumn,
@@ -88,7 +88,7 @@ export const main = async (fileName: string, config: Config) => {
     const links: Link[] = []
     convertToFinalNode(parentNode, nodes, links, x, y + NEXT_NODE_POSITION_Y)
 
-    const schema: CustomSchema = {
+    const diagram: CustomDiagram = {
       width: diagramWidth + NEXT_NODE_POSITION_X,
       height: diagramHeight + NEXT_NODE_POSITION_Y,
       schema: {
@@ -97,7 +97,7 @@ export const main = async (fileName: string, config: Config) => {
       },
     }
 
-    writeHtml(schema)
+    writeHtml(diagram)
   } catch (e) {
     console.log(chalk.red(`e: ${e}`))
   }

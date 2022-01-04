@@ -36,7 +36,7 @@ export type Data = {
   loc: Loc
 }
 
-export type CustomSchema = {
+export type CustomDiagram = {
   width: number
   height: number
   schema: DiagramSchema<Data>
