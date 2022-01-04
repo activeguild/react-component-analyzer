@@ -1,20 +1,20 @@
 import chalk from 'chalk'
 import { writeFileSync } from 'fs'
 import path from 'path'
-import { CustomSchema } from './types'
+import { CustomDiagram } from './types'
 
-export const writeHtml = (diagram: CustomSchema): void => {
-  const outputFilePath = path.resolve(__dirname, '../dist/stats.html')
+export const writeHtml = (diagram: CustomDiagram): void => {
+  const outputFilePath = path.resolve(path.resolve(), '../stats.html')
   writeFileSync(outputFilePath, getHtml(diagram))
   console.log(chalk.green(`Success. ${outputFilePath}`))
   return
 }
 
-const getDiagramJson = (diagram: CustomSchema): string => {
+const getDiagramJson = (diagram: CustomDiagram): string => {
   return `const diagram =${JSON.stringify(diagram)}`
 }
 
-const getHtml = (diagram: CustomSchema) => {
+const getHtml = (diagram: CustomDiagram) => {
   const getScriptPath = () => path.resolve(__dirname, '../dist/viewer.js')
 
   return `<!DOCTYPE html>

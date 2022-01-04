@@ -1,5 +1,5 @@
-import { CustomSchema } from './types'
+import { CustomDiagram } from './types'
 
 declare global {
-  const diagram: CustomSchema
+  const diagram: CustomDiagram
 }
