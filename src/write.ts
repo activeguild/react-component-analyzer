@@ -15,7 +15,8 @@ const getDiagramJson = (diagram: CustomDiagram): string => {
 }
 
 const getHtml = (diagram: CustomDiagram) => {
-  const getScriptPath = () => path.resolve(__dirname, '../dist/viewer.js')
+  const resolveFilePath = (filaPath: string) =>
+    path.resolve(__dirname, filaPath)
 
   return `<!DOCTYPE html>
 <html>
@@ -23,6 +24,9 @@ const getHtml = (diagram: CustomDiagram) => {
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title></title>
+    <link href="${resolveFilePath(
+      '../dist/vendor/prism.css'
+    )}" rel="stylesheet" />
     <script>
     ${getDiagramJson(diagram)}
     </script>
@@ -39,6 +43,13 @@ const getHtml = (diagram: CustomDiagram) => {
       border: none !important;
       box-shadow: none !important;
     }
+    a {
+      padding: 4px;
+      cursor: pointer;
+    }
+    a + a {
+      margin-left: 4px;
+    }
     a,
     a:visited {
       color: white !important;
@@ -46,11 +57,26 @@ const getHtml = (diagram: CustomDiagram) => {
     a:hover {
       opacity: .7;
     }
+    .drawer { 
+      height: 100%;
+      background: white;
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 40%;
+      z-index: 200;
+      box-shadow: 1px 0px 7px rgba(0,0,0,0.5); 
+      transform: translateX(100%);
+      transition: transform 0.3s ease-out;
+    }
+    .drawer.open {
+      transform: translateX(0);
+    }
     </style>
   </head>
   <body>
     <div id="root" />
-    <script src="${getScriptPath()}"></script>
+    <script src="${resolveFilePath('../dist/viewer.js')}"></script>
   </body>
 </html>`
 }

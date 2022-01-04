@@ -29,6 +29,8 @@ jobs:
         run: ./tools/release.sh
       - name: build
         run: npm run build
+      - name: copy
+        run: mv ./vendor ./dist
       - name: release
         run: npm publish
         env:

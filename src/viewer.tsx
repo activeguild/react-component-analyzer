@@ -4,9 +4,17 @@ import type {
   Node,
 } from 'beautiful-react-diagrams/@types/DiagramSchema'
 import 'beautiful-react-diagrams/styles.css'
-import React, { ElementType, ReactNode } from 'react'
+import Prism from 'prismjs'
+import React, {
+  ElementType,
+  ReactNode,
+  useCallback,
+  useState,
+  VFC,
+} from 'react'
 import ReactDOM from 'react-dom'
-import { FaExternalLinkAlt } from 'react-icons/fa'
+import { FaExternalLinkAlt, FaTimes } from 'react-icons/fa'
+import { GoSearch } from 'react-icons/go'
 import { NODE_HEIGHT, NODE_WIDTH } from './constants'
 import type { CustomDiagram as CustomDiagramType, Data } from './types'
 
@@ -20,15 +28,81 @@ const App = () => {
     node.render = CustomNode
   }
 
-  return <CustomDiagram customDiagram={diagram} initialSchema={initialSchema} />
+  return <Layout customSchema={diagram} initialSchema={initialSchema} />
 }
 
+type DrawerProps = {
+  code: string
+  open: boolean
+  handleClose: () => void
+}
+const Drawer: VFC<DrawerProps> = (props) => {
+  const { open, code, handleClose } = props
+  let className = 'drawer'
+  if (open) {
+    className = `${className} open`
+  }
+  const html = Prism.highlight(code, Prism.languages.javascript, 'javascript')
+  return (
+    <div style={{ background: '#272822' }} className={className}>
+      <pre className="line-numbers">
+        <code
+          className="language-typescript"
+          dangerouslySetInnerHTML={{
+            __html: html,
+          }}
+        ></code>
+      </pre>
+      <a
+        style={{
+          position: 'absolute',
+          fontSize: '14px',
+          top: '12px',
+          right: '12px',
+        }}
+        onClick={handleClose}
+      >
+        <FaTimes />
+      </a>
+    </div>
+  )
+}
+const useDrawer = (initialValue = false) => {
+  const [state, setState] = useState(initialValue)
+  const [code, setCode] = useState('')
+
+  const toggle = useCallback(
+    (newCode: string) => {
+      if (!newCode) {
+        setCode('')
+        setState(false)
+        return
+      }
+
+      if (code !== newCode) {
+        setCode(newCode)
+        setState(true)
+      } else {
+        setState((prevState) => !prevState)
+      }
+    },
+    [code, state]
+  )
+
+  return { state, toggle, code }
+}
 type CustomNodeType = (
   props: Omit<Node<Data>, 'coordinates'>
 ) => ElementType | ReactNode
 
 const CustomNode: CustomNodeType = (props) => {
   const { id, data } = props
+  const { fileName, handleShowDetail } = data || {
+    fileName: '',
+    handleShowDetail: () => {
+      // default
+    },
+  }
 
   return (
     <div
@@ -56,16 +130,19 @@ const CustomNode: CustomNodeType = (props) => {
         {data ? data.title : id}
       </div>
       <div style={{ textAlign: 'right' }}>
+        <a onClick={handleShowDetail}>
+          <GoSearch />
+        </a>
         {data && data.vscode ? (
           <a
-            href={data ? data.fileName : ''}
+            href={fileName}
             onClick={(event) => {
-              const { loc } = data
-              location.href = `vscode://file/${data ? data.fileName : ''}:${
-                loc.start.line
-              }:${loc.start.column}`
+              if (data) {
+                const { loc } = data
+                location.href = `vscode://file/${fileName}:${loc.start.line}:${loc.start.column}`
 
-              event.preventDefault()
+                event.preventDefault()
+              }
             }}
           >
             <FaExternalLinkAlt />
@@ -75,6 +152,38 @@ const CustomNode: CustomNodeType = (props) => {
         )}
       </div>
     </div>
+  )
+}
+
+type LayoutProps = {
+  customSchema: CustomDiagramType
+  initialSchema: DiagramSchema<Data>
+}
+
+const Layout: VFC<LayoutProps> = (prpops) => {
+  const { customSchema, initialSchema } = prpops
+  const { state: open, toggle: toggle, code } = useDrawer(false)
+
+  for (const node of initialSchema.nodes) {
+    node.render = CustomNode
+    if (node.data) {
+      const data = node.data
+      node.data.handleShowDetail = () => {
+        toggle(data.code)
+      }
+    }
+  }
+  const handleClose = () => {
+    toggle('')
+  }
+  return (
+    <>
+      <Drawer open={open} code={code} handleClose={handleClose} />
+      <CustomDiagram
+        customDiagram={customSchema}
+        initialSchema={initialSchema}
+      />
+    </>
   )
 }
 
