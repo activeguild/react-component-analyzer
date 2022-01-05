@@ -5,7 +5,7 @@ import { CustomDiagram } from './types'
 
 export const writeHtml = (diagram: CustomDiagram): void => {
   const outputFilePath = path.resolve(path.resolve(), './stats.html')
-  writeFileSync(outputFilePath, getHtml(diagram))
+  writeFileSync(outputFilePath, makeHtml(diagram))
   console.log(chalk.green(`Success. ${outputFilePath}`))
   return
 }
@@ -14,7 +14,7 @@ const getDiagramJson = (diagram: CustomDiagram): string => {
   return `const diagram =${JSON.stringify(diagram)}`
 }
 
-const getHtml = (diagram: CustomDiagram) => {
+const makeHtml = (diagram: CustomDiagram) => {
   const resolveFilePath = (filaPath: string) =>
     path.resolve(__dirname, filaPath)
 
