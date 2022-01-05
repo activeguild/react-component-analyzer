@@ -32,20 +32,25 @@ const App = () => {
 }
 
 type DrawerProps = {
-  code: string
-  open: boolean
+  state: DrawerState
   handleClose: () => void
 }
 const Drawer: VFC<DrawerProps> = (props) => {
-  const { open, code, handleClose } = props
+  const { state, handleClose } = props
+  const { open, code, loc } = state
   let className = 'drawer'
   if (open) {
     className = `${className} open`
   }
-
+  console.log('loc :>> ', loc)
   setTimeout(() => {
     Prism.highlightAll()
   }, 100)
+
+  let dataLine = ''
+  if (loc) {
+    dataLine = `${loc.start.line}-${loc.end.line}`
+  }
 
   const __html = Prism.highlight(code, Prism.languages.typescript, 'typescript')
   return (
@@ -53,7 +58,7 @@ const Drawer: VFC<DrawerProps> = (props) => {
       style={{ background: '#272822', paddingLeft: '16px' }}
       className={className}
     >
-      <pre className="language-typescript line-numbers">
+      <pre data-line={dataLine} className="language-typescript line-numbers">
         <code
           dangerouslySetInnerHTML={{
             __html,
@@ -94,7 +99,12 @@ const useDrawer = () => {
 
       setState((prevState) => {
         if (prevState.code !== newState.code) {
-          return { ...prevState, open: true, code: newState.code }
+          return {
+            ...prevState,
+            open: true,
+            code: newState.code,
+            loc: newState.loc,
+          }
         } else {
           return { ...prevState, open: !prevState.open, code: '' }
         }
@@ -183,7 +193,7 @@ const Layout: VFC<LayoutProps> = (prpops) => {
     if (node.data) {
       const data = node.data
       node.data.handleShowDetail = () => {
-        toggle({ open: state.open, code: data.code })
+        toggle({ open: state.open, code: data.code, loc: data.loc })
       }
     }
   }
@@ -192,7 +202,7 @@ const Layout: VFC<LayoutProps> = (prpops) => {
   }
   return (
     <>
-      <Drawer open={state.open} code={state.code} handleClose={handleClose} />
+      <Drawer state={state} handleClose={handleClose} />
       <CustomDiagram
         customDiagram={customSchema}
         initialSchema={initialSchema}
