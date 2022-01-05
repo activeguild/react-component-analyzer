@@ -16,7 +16,7 @@ import ReactDOM from 'react-dom'
 import { FaExternalLinkAlt, FaTimes } from 'react-icons/fa'
 import { GoSearch } from 'react-icons/go'
 import { NODE_HEIGHT, NODE_WIDTH } from './constants'
-import type { CustomDiagram as CustomDiagramType, Data } from './types'
+import type { CustomDiagram as CustomDiagramType, Data, Loc } from './types'
 
 const App = () => {
   const initialSchema = createSchema(diagram.schema)
@@ -74,32 +74,36 @@ const Drawer: VFC<DrawerProps> = (props) => {
     </div>
   )
 }
-const useDrawer = (initialValue = false) => {
-  const [state, setState] = useState(initialValue)
-  const [code, setCode] = useState('')
+type DrawerState = {
+  open: boolean
+  code: string
+  loc?: Loc
+}
+const useDrawer = () => {
+  const [state, setState] = useState<DrawerState>({
+    open: false,
+    code: '',
+  })
 
   const toggle = useCallback(
-    (newCode: string) => {
-      if (!newCode) {
-        setCode('')
-        setState(false)
+    (newState: DrawerState) => {
+      if (!newState.code) {
+        setState({ open: false, code: '' })
         return
       }
 
-      setCode((prevCode) => {
-        if (prevCode !== newCode) {
-          setState(true)
-          return newCode
+      setState((prevState) => {
+        if (prevState.code !== newState.code) {
+          return { ...prevState, open: true, code: newState.code }
         } else {
-          setState((prevState) => !prevState)
-          return ''
+          return { ...prevState, open: !prevState.open, code: '' }
         }
       })
     },
-    [code, state]
+    [state]
   )
 
-  return { state, toggle, code }
+  return { state, toggle }
 }
 type CustomNodeType = (
   props: Omit<Node<Data>, 'coordinates'>
@@ -172,23 +176,23 @@ type LayoutProps = {
 
 const Layout: VFC<LayoutProps> = (prpops) => {
   const { customSchema, initialSchema } = prpops
-  const { state: open, toggle: toggle, code } = useDrawer(false)
+  const { state, toggle: toggle } = useDrawer()
 
   for (const node of initialSchema.nodes) {
     node.render = CustomNode
     if (node.data) {
       const data = node.data
       node.data.handleShowDetail = () => {
-        toggle(data.code)
+        toggle({ open: state.open, code: data.code })
       }
     }
   }
   const handleClose = () => {
-    toggle('')
+    toggle({ open: false, code: '' })
   }
   return (
     <>
-      <Drawer open={open} code={code} handleClose={handleClose} />
+      <Drawer open={state.open} code={state.code} handleClose={handleClose} />
       <CustomDiagram
         customDiagram={customSchema}
         initialSchema={initialSchema}
