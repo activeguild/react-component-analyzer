@@ -8,3 +8,4 @@ webpack.config.ts
 .eslintrc.js
 .prettierrc.js
 ./vendor
+.babelrc
