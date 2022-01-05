@@ -72,6 +72,12 @@ const makeHtml = (diagram: CustomDiagram) => {
     .drawer.open {
       transform: translateX(0);
     }
+    .line-highlight {
+      background: linear-gradient(to right, hsla(124, 120%, 50%,.15) 100%, hsla(24, 20%, 50%,0)) !important;
+    }
+    div.code-toolbar > .toolbar {
+      top: -4px;
+    }
     </style>
   </head>
   <body>

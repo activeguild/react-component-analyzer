@@ -42,7 +42,6 @@ const Drawer: VFC<DrawerProps> = (props) => {
   if (open) {
     className = `${className} open`
   }
-  console.log('loc :>> ', loc)
   setTimeout(() => {
     Prism.highlightAll()
   }, 100)
@@ -55,7 +54,7 @@ const Drawer: VFC<DrawerProps> = (props) => {
   const __html = Prism.highlight(code, Prism.languages.typescript, 'typescript')
   return (
     <div
-      style={{ background: '#272822', paddingLeft: '16px' }}
+      style={{ background: '#272822', paddingLeft: '16px', paddingTop: '18px' }}
       className={className}
     >
       <pre data-line={dataLine} className="language-typescript line-numbers">
@@ -81,32 +80,35 @@ const Drawer: VFC<DrawerProps> = (props) => {
 }
 type DrawerState = {
   open: boolean
+  title: string
   code: string
   loc?: Loc
 }
 const useDrawer = () => {
   const [state, setState] = useState<DrawerState>({
     open: false,
+    title: '',
     code: '',
   })
 
   const toggle = useCallback(
     (newState: DrawerState) => {
       if (!newState.code) {
-        setState({ open: false, code: '' })
+        setState({ open: false, title: '', code: '' })
         return
       }
 
       setState((prevState) => {
-        if (prevState.code !== newState.code) {
+        if (prevState.title !== newState.title) {
           return {
             ...prevState,
             open: true,
+            title: newState.title,
             code: newState.code,
             loc: newState.loc,
           }
         } else {
-          return { ...prevState, open: !prevState.open, code: '' }
+          return { ...prevState, open: !prevState.open, title: '', code: '' }
         }
       })
     },
@@ -193,12 +195,17 @@ const Layout: VFC<LayoutProps> = (prpops) => {
     if (node.data) {
       const data = node.data
       node.data.handleShowDetail = () => {
-        toggle({ open: state.open, code: data.code, loc: data.loc })
+        toggle({
+          open: state.open,
+          title: data.title,
+          code: data.code,
+          loc: data.loc,
+        })
       }
     }
   }
   const handleClose = () => {
-    toggle({ open: false, code: '' })
+    toggle({ open: false, title: '', code: '' })
   }
   return (
     <>
