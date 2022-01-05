@@ -34,6 +34,9 @@
   },
   "homepage": "https://github.com/activeguild/visualize-react-component#readme",
   "devDependencies": {
+    "@babel/core": "^7.16.7",
+    "@babel/preset-env": "^7.16.7",
+    "@babel/preset-react": "^7.16.7",
     "@projectstorm/react-diagrams": "^6.6.1",
     "@types/mini-css-extract-plugin": "^2.4.0",
     "@types/node": "^17.0.6",
@@ -44,6 +47,8 @@
     "@typescript-eslint/eslint-plugin": "^5.8.1",
     "@typescript-eslint/parser": "^5.8.1",
     "@typescript-eslint/typescript-estree": "^5.8.1",
+    "babel-loader": "^8.2.3",
+    "babel-plugin-prismjs": "^2.1.0",
     "beautiful-react-diagrams": "^0.5.1",
     "css-loader": "^6.5.1",
     "esbuild": "^0.14.10",

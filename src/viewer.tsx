@@ -42,14 +42,21 @@ const Drawer: VFC<DrawerProps> = (props) => {
   if (open) {
     className = `${className} open`
   }
-  const html = Prism.highlight(code, Prism.languages.javascript, 'javascript')
+
+  setTimeout(() => {
+    Prism.highlightAll()
+  }, 100)
+
+  const __html = Prism.highlight(code, Prism.languages.typescript, 'typescript')
   return (
-    <div style={{ background: '#272822' }} className={className}>
-      <pre className="line-numbers">
+    <div
+      style={{ background: '#272822', paddingLeft: '16px' }}
+      className={className}
+    >
+      <pre className="language-typescript line-numbers">
         <code
-          className="language-typescript"
           dangerouslySetInnerHTML={{
-            __html: html,
+            __html,
           }}
         ></code>
       </pre>
@@ -57,8 +64,8 @@ const Drawer: VFC<DrawerProps> = (props) => {
         style={{
           position: 'absolute',
           fontSize: '14px',
-          top: '12px',
-          right: '12px',
+          top: '8px',
+          left: '8px',
         }}
         onClick={handleClose}
       >
