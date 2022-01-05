@@ -16,7 +16,7 @@ import ReactDOM from 'react-dom'
 import { FaExternalLinkAlt, FaTimes } from 'react-icons/fa'
 import { GoSearch } from 'react-icons/go'
 import { NODE_HEIGHT, NODE_WIDTH } from './constants'
-import type { CustomDiagram as CustomDiagramType, Data } from './types'
+import type { CustomDiagram as CustomDiagramType, Data, Loc } from './types'
 
 const App = () => {
   const initialSchema = createSchema(diagram.schema)
@@ -32,28 +32,32 @@ const App = () => {
 }
 
 type DrawerProps = {
-  code: string
-  open: boolean
+  state: DrawerState
   handleClose: () => void
 }
 const Drawer: VFC<DrawerProps> = (props) => {
-  const { open, code, handleClose } = props
+  const { state, handleClose } = props
+  const { open, code, loc } = state
   let className = 'drawer'
   if (open) {
     className = `${className} open`
   }
-
   setTimeout(() => {
     Prism.highlightAll()
   }, 100)
 
+  let dataLine = ''
+  if (loc) {
+    dataLine = `${loc.start.line}-${loc.end.line}`
+  }
+
   const __html = Prism.highlight(code, Prism.languages.typescript, 'typescript')
   return (
     <div
-      style={{ background: '#272822', paddingLeft: '16px' }}
+      style={{ background: '#272822', paddingLeft: '16px', paddingTop: '18px' }}
       className={className}
     >
-      <pre className="language-typescript line-numbers">
+      <pre data-line={dataLine} className="language-typescript line-numbers">
         <code
           dangerouslySetInnerHTML={{
             __html,
@@ -74,32 +78,44 @@ const Drawer: VFC<DrawerProps> = (props) => {
     </div>
   )
 }
-const useDrawer = (initialValue = false) => {
-  const [state, setState] = useState(initialValue)
-  const [code, setCode] = useState('')
+type DrawerState = {
+  open: boolean
+  title: string
+  code: string
+  loc?: Loc
+}
+const useDrawer = () => {
+  const [state, setState] = useState<DrawerState>({
+    open: false,
+    title: '',
+    code: '',
+  })
 
   const toggle = useCallback(
-    (newCode: string) => {
-      if (!newCode) {
-        setCode('')
-        setState(false)
+    (newState: DrawerState) => {
+      if (!newState.code) {
+        setState({ open: false, title: '', code: '' })
         return
       }
 
-      setCode((prevCode) => {
-        if (prevCode !== newCode) {
-          setState(true)
-          return newCode
+      setState((prevState) => {
+        if (prevState.title !== newState.title) {
+          return {
+            ...prevState,
+            open: true,
+            title: newState.title,
+            code: newState.code,
+            loc: newState.loc,
+          }
         } else {
-          setState((prevState) => !prevState)
-          return ''
+          return { ...prevState, open: !prevState.open, title: '', code: '' }
         }
       })
     },
-    [code, state]
+    [state]
   )
 
-  return { state, toggle, code }
+  return { state, toggle }
 }
 type CustomNodeType = (
   props: Omit<Node<Data>, 'coordinates'>
@@ -172,23 +188,28 @@ type LayoutProps = {
 
 const Layout: VFC<LayoutProps> = (prpops) => {
   const { customSchema, initialSchema } = prpops
-  const { state: open, toggle: toggle, code } = useDrawer(false)
+  const { state, toggle: toggle } = useDrawer()
 
   for (const node of initialSchema.nodes) {
     node.render = CustomNode
     if (node.data) {
       const data = node.data
       node.data.handleShowDetail = () => {
-        toggle(data.code)
+        toggle({
+          open: state.open,
+          title: data.title,
+          code: data.code,
+          loc: data.loc,
+        })
       }
     }
   }
   const handleClose = () => {
-    toggle('')
+    toggle({ open: false, title: '', code: '' })
   }
   return (
     <>
-      <Drawer open={open} code={code} handleClose={handleClose} />
+      <Drawer state={state} handleClose={handleClose} />
       <CustomDiagram
         customDiagram={customSchema}
         initialSchema={initialSchema}

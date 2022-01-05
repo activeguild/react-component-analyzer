@@ -6,7 +6,12 @@
       "prismjs",
       {
         "languages": ["typescript", "javascript", "css", "markup"],
-        "plugins": ["line-numbers", "show-language", "copy-to-clipboard"],
+        "plugins": [
+          "line-highlight",
+          "line-numbers",
+          "show-language",
+          "copy-to-clipboard"
+        ],
         "theme": "okaidia",
         "css": true
       }

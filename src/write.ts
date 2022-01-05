@@ -5,7 +5,7 @@ import { CustomDiagram } from './types'
 
 export const writeHtml = (diagram: CustomDiagram): void => {
   const outputFilePath = path.resolve(path.resolve(), './stats.html')
-  writeFileSync(outputFilePath, getHtml(diagram))
+  writeFileSync(outputFilePath, makeHtml(diagram))
   console.log(chalk.green(`Success. ${outputFilePath}`))
   return
 }
@@ -14,7 +14,7 @@ const getDiagramJson = (diagram: CustomDiagram): string => {
   return `const diagram =${JSON.stringify(diagram)}`
 }
 
-const getHtml = (diagram: CustomDiagram) => {
+const makeHtml = (diagram: CustomDiagram) => {
   const resolveFilePath = (filaPath: string) =>
     path.resolve(__dirname, filaPath)
 
@@ -71,6 +71,12 @@ const getHtml = (diagram: CustomDiagram) => {
     }
     .drawer.open {
       transform: translateX(0);
+    }
+    .line-highlight {
+      background: linear-gradient(to right, hsla(124, 120%, 50%,.15) 100%, hsla(24, 20%, 50%,0)) !important;
+    }
+    div.code-toolbar > .toolbar {
+      top: -4px;
     }
     </style>
   </head>
