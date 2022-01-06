@@ -2,7 +2,6 @@ import { AST_NODE_TYPES } from '@typescript-eslint/typescript-estree'
 import type { Link, Node } from 'beautiful-react-diagrams/@types/DiagramSchema'
 import chalk from 'chalk'
 import path from 'path'
-import {} from 'vite'
 import { analyze } from './analyze'
 import { loadVite, resolveFinalConfig } from './config'
 import {
