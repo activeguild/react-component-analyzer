@@ -6,13 +6,15 @@
 
 ## visualize-react-component
 
-Analyze the component tree of react and display it in a diagram.
-![react-component](https://user-images.githubusercontent.com/39351982/148112626-4f5ed09c-0281-4763-b48c-c8b6d2a47969.gif)
+Analyze the component tree of react and displays it as a diagram in the browser.
+You can refer to the corresponding code from the diagram.
+
+![スクリーンショット 2022-01-06 13 09 53](https://user-images.githubusercontent.com/39351982/148326935-f8df6729-2a76-49de-bf55-f765970a7caa.png)
 
 ## Motivation
 
-It plays an auxiliary role in visualizing the component design during implementation and activating smooth discussions.
-It will lead to shrinking the cost of development.
+- It plays an auxiliary role in visualizing the component design during implementation and activating smooth discussions.
+- It will lead to shrinking the cost of development.
 
 ## Point
 
