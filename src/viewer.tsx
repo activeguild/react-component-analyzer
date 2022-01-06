@@ -142,7 +142,7 @@ const CustomNode: CustomNodeType = (props) => {
         borderRadius: '10px',
         height: `${NODE_HEIGHT}px`,
         width: `${NODE_WIDTH}px`,
-        border: 'solid 1px #1bfdc8',
+        border: 'solid 1px white',
         padding: '10px',
         boxSizing: 'border-box',
         display: 'flex',
