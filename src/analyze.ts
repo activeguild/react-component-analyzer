@@ -95,7 +95,7 @@ const analyzeAst = (
   code: string
 ) => {
   if (body.type === AST_NODE_TYPES.ImportDeclaration) {
-    analyzeImport(alias, parentNode, dir, body, code)
+    analyzeImport(alias, parentNode, dir, body)
   } else if (body.type === AST_NODE_TYPES.FunctionDeclaration) {
     if (
       parentNode.astType !== AST_NODE_TYPES.ImportDefaultSpecifier ||
@@ -182,8 +182,7 @@ const analyzeImport = (
   alias: Alias[],
   parentNode: ExtentionNode,
   dir: string,
-  importDec: ImportDeclaration,
-  code: string
+  importDec: ImportDeclaration
 ) => {
   if (importDec.importKind === 'type') return
   const filePath = resolveAlias(alias, dir, importDec)

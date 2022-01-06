@@ -1,4 +1,5 @@
 import type { ImportDeclaration } from '@typescript-eslint/types/dist/ast-spec'
+import fs from 'fs'
 import path from 'path'
 import { Alias, Config } from './types'
 
@@ -32,4 +33,26 @@ export const resolveAlias = (
   }
 
   return path.resolve(dir, importDec.source.value)
+}
+
+export const loadVite = async (): Promise<any> => {
+  try {
+    const config = fs.readFileSync((path.resolve(), 'vite.config.ts'))
+    const fallbackPaths = require.resolve.paths?.('vite') || []
+    const resolved = require.resolve('vite', {
+      paths: [...fallbackPaths],
+    })
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const vite = require(resolved)
+    const resolvedConfig = await vite.resolveConfig(config, 'serve')
+
+    return resolvedConfig.resolve.alias
+      ? resolvedConfig.resolve.alias.filter(
+          (alias: any) => typeof alias.find === 'string'
+        )
+      : resolvedConfig.resolve.alias
+  } catch (e) {
+    // Not founcd vite dependency.
+    return
+  }
 }
