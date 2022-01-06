@@ -2,8 +2,9 @@ import { AST_NODE_TYPES } from '@typescript-eslint/typescript-estree'
 import type { Link, Node } from 'beautiful-react-diagrams/@types/DiagramSchema'
 import chalk from 'chalk'
 import path from 'path'
+import {} from 'vite'
 import { analyze } from './analyze'
-import { resolveFinalConfig } from './config'
+import { loadVite, resolveFinalConfig } from './config'
 import {
   NEXT_NODE_POSITION_X,
   NEXT_NODE_POSITION_Y,
@@ -27,6 +28,13 @@ export const main = async (fileName: string, config: Config) => {
   try {
     if (!path.isAbsolute(fileName)) {
       fileName = path.resolve(path.resolve(), fileName)
+    }
+
+    const aliasForViteConfig = await loadVite()
+    if (aliasForViteConfig) {
+      if (!config.alias) {
+        config.alias = aliasForViteConfig
+      }
     }
 
     const finalConfig: Required<Config> = resolveFinalConfig(config)

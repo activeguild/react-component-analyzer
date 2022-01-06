@@ -21,7 +21,7 @@ It will lead to shrinking the cost of development.
 
 ## Future plans
 
-- [ ] Vite alias resolution.
+- [x] Vite alias resolution.
 - [x] Code viewer in browser.
 
 ## Install
