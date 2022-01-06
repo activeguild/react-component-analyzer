@@ -63,7 +63,7 @@ module.exports = {
   alias: [
     {
       find: '@',
-      replacement: path.resolve('./src'),
+      replacement: path.resolve(__dirname, 'src'),
     },
   ],
 }
