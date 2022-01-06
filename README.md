@@ -17,12 +17,9 @@ It will lead to shrinking the cost of development.
 ## Point
 
 - Using the popular library, [@typescript-eslint/typescript-estree](https://github.com/typescript-eslint/typescript-eslint/tree/main/packages/typescript-estree) AST to do the analysis.
-- By using VSCode's schema in the Browser, you can quickly check the implementation of components you are interested in.
-
-## Future plans
-
-- [x] Vite alias resolution.
-- [x] Code viewer in browser.
+- By using VSCode's schema in the Browser, you can quickly check the implementation of components you are interested in.If you do not have vscode installed, you can also check the code in your browser.
+- If you are using vite without setting it in the config file, you can resolve the alias from vite.config.ts.
+- It uses [prismjs](https://github.com/PrismJS/prism/), which allows for code reading that is more like an IDE.
 
 ## Install
 
