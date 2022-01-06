@@ -1,7 +1,7 @@
 {
   "name": "visualize-react-component",
   "version": "1.0.17",
-  "description": "Analyze the component tree of react and display it in a diagram.",
+  "description": "Analyze the component tree of react and displays it as a diagram in the browser. You can refer to the corresponding code from the diagram.",
   "main": "cli.js",
   "scripts": {
     "build": "npm run build:cli && npm run build:viewer && cp -r ./vendor ./dist",
