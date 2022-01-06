@@ -63,7 +63,7 @@ const makeHtml = (diagram: CustomDiagram) => {
       position: fixed;
       top: 0;
       right: 0;
-      width: 40%;
+      width: 600px;
       z-index: 200;
       box-shadow: 1px 0px 7px rgba(0,0,0,0.5); 
       transform: translateX(100%);

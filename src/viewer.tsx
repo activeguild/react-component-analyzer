@@ -54,7 +54,12 @@ const Drawer: VFC<DrawerProps> = (props) => {
   const __html = Prism.highlight(code, Prism.languages.typescript, 'typescript')
   return (
     <div
-      style={{ background: '#272822', paddingLeft: '16px', paddingTop: '18px' }}
+      style={{
+        background: '#272822',
+        paddingLeft: '16px',
+        paddingTop: '18px',
+        overflow: 'scroll',
+      }}
       className={className}
     >
       <pre data-line={dataLine} className="language-typescript line-numbers">
