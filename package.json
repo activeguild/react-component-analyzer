@@ -7,7 +7,6 @@
     "build": "npm run build:cli && npm run build:viewer && cp -r ./vendor ./dist",
     "build:cli": "tsc --project tsconfig.json",
     "build:viewer": "webpack --mode production",
-    "cli": "node --require esbuild-register ./src/cli.ts",
     "eslint": "eslint '**/*.{js,jsx,ts,tsx}' --ignore-path .gitignore",
     "prettier": "prettier . --write"
   },
@@ -25,7 +24,8 @@
     "component",
     "tree",
     "diagram",
-    "analyze"
+    "analyze",
+    "parse"
   ],
   "author": "j1ngzoue",
   "license": "MIT",
