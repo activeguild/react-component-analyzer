@@ -100,6 +100,8 @@ export const main = async (fileName: string, config: Config) => {
     writeHtml(diagram)
   } catch (e) {
     console.log(chalk.red(`e: ${e}`))
+  } finally {
+    process.exit()
   }
 }
 
