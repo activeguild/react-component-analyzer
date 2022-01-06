@@ -57,13 +57,13 @@ Prepare a `virot.config.js` file with the following properties.
 #### Sample
 
 ```js
-import path from 'path'
+const path = require('path')
 
 module.exports = {
   alias: [
     {
       find: '@',
-      replacement: path.resolve('./src'),
+      replacement: path.resolve(__dirname, 'src'),
     },
   ],
 }
