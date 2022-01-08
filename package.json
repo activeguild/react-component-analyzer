@@ -1,6 +1,6 @@
 {
   "name": "visualize-react-component",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "description": "Analyze the component tree of react and displays it as a diagram in the browser. You can refer to the corresponding code from the diagram.",
   "main": "cli.js",
   "scripts": {
