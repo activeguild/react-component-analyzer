@@ -11,6 +11,6 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true
   },
-  "include": ["src"],
+  "include": ["src", "tools"],
   "exclude": ["webpack.config.ts"]
 }

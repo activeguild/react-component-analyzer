@@ -1,10 +1,10 @@
 {
   "name": "visualize-react-component",
-  "version": "1.0.21",
+  "version": "1.0.23",
   "description": "Analyze the component tree of react and displays it as a diagram in the browser. You can refer to the corresponding code from the diagram.",
   "main": "cli.js",
   "scripts": {
-    "build": "npm run build:cli && npm run build:viewer && cp -r ./vendor ./dist",
+    "build": "rimraf dist && node -r esbuild-register ./tools/esbuild.ts && cp -r ./vendor ./dist",
     "build:cli": "tsc --project tsconfig.json",
     "build:viewer": "webpack --mode production",
     "eslint": "eslint '**/*.{js,jsx,ts,tsx}' --ignore-path .gitignore",
@@ -52,6 +52,7 @@
     "css-loader": "^6.5.1",
     "esbuild": "^0.14.10",
     "esbuild-loader": "^2.18.0",
+    "esbuild-plugin-prismjs": "^1.0.3",
     "esbuild-register": "^3.3.1",
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
@@ -62,6 +63,7 @@
     "prettier": "^2.5.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "rimraf": "^3.0.2",
     "sass-loader": "^12.4.0",
     "style-loader": "^3.3.1",
     "thread-loader": "^3.0.4",
