@@ -30,4 +30,11 @@ build({
   bundle: true,
   minify: true,
   platform: 'node',
+  external: [
+    'path',
+    'chalk',
+    'commander',
+    'fs',
+    '@typescript-eslint/typescript-estree',
+  ],
 }).catch(() => process.exit(1))
