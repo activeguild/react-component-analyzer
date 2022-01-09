@@ -24,9 +24,6 @@ const makeHtml = (diagram: CustomDiagram) => {
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title></title>
-    <link href="${resolveFilePath(
-      '../dist/vendor/prism.css'
-    )}" rel="stylesheet" />
     <link href="${resolveFilePath('../dist/viewer.css')}" rel="stylesheet" />
     <script>
     ${getDiagramJson(diagram)}
