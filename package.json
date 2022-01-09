@@ -1,6 +1,6 @@
 {
   "name": "visualize-react-component",
-  "version": "1.0.26",
+  "version": "1.0.27",
   "description": "Analyze the component tree of react and displays it as a diagram in the browser. You can refer to the corresponding code from the diagram.",
   "main": "cli.js",
   "scripts": {
@@ -41,7 +41,7 @@
     "beautiful-react-diagrams": "^0.5.1",
     "esbuild": "^0.14.10",
     "esbuild-loader": "^2.18.0",
-    "esbuild-plugin-prismjs": "^1.0.3",
+    "esbuild-plugin-prismjs": "^1.0.5",
     "esbuild-register": "^3.3.1",
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
