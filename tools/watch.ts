@@ -22,7 +22,21 @@ build({
       css: true,
     }),
   ],
-}).catch(() => process.exit(1))
+  watch: {
+    onRebuild: (error) => {
+      if (error) {
+        console.log('error :>> ', error)
+      } else {
+        console.log('Build viewer success!!')
+      }
+    },
+  },
+})
+  .catch(() => process.exit(1))
+  .then(() => {
+    console.log('===========================================')
+    console.log(`${new Date().toLocaleString()}:viewer watching...`)
+  })
 
 build({
   entryPoints: ['./src/cli.ts'],
@@ -37,4 +51,18 @@ build({
     'fs',
     '@typescript-eslint/typescript-estree',
   ],
-}).catch(() => process.exit(1))
+  watch: {
+    onRebuild: (error) => {
+      if (error) {
+        console.log('error :>> ', error)
+      } else {
+        console.log('Build cli success!!')
+      }
+    },
+  },
+})
+  .catch(() => process.exit(1))
+  .then(() => {
+    console.log('===========================================')
+    console.log(`${new Date().toLocaleString()}:cli watching...`)
+  })
