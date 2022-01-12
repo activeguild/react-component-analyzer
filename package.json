@@ -5,6 +5,7 @@
   "main": "cli.js",
   "scripts": {
     "build": "rimraf dist && node -r esbuild-register ./tools/build.ts && cp -r ./vendor ./dist",
+    "watch": "rimraf dist && node -r esbuild-register ./tools/watch.ts && cp -r ./vendor ./dist",
     "eslint": "eslint '**/*.{js,jsx,ts,tsx}' --ignore-path .gitignore",
     "prettier": "prettier . --write"
   },
