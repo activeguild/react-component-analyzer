@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { build } from 'esbuild'
-import { prismPlugin } from 'esbuild-plugin-prismjs'
+import { prismjsPlugin } from 'esbuild-plugin-prismjs'
 
 build({
   entryPoints: ['./src/viewer.tsx'],
@@ -10,7 +10,7 @@ build({
   format: 'esm',
   target: ['esnext'],
   plugins: [
-    prismPlugin({
+    prismjsPlugin({
       languages: ['typescript', 'javascript', 'css', 'markup'],
       plugins: [
         'line-highlight',
