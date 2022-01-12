@@ -7,6 +7,7 @@ import 'beautiful-react-diagrams/styles.css'
 import Prism from 'prismjs'
 import React, {
   ElementType,
+  MouseEvent,
   ReactNode,
   useCallback,
   useState,
@@ -137,6 +138,7 @@ const CustomNode: CustomNodeType = (props) => {
 
   return (
     <div
+      id={id}
       style={{
         background: '#01060B',
         borderRadius: '10px',
@@ -194,6 +196,8 @@ type LayoutProps = {
 const Layout: VFC<LayoutProps> = (prpops) => {
   const { customSchema, initialSchema } = prpops
   const { state, toggle: toggle } = useDrawer()
+  const [navId, setNavId] = useState('')
+  const sideMenu: string[] = []
 
   for (const node of initialSchema.nodes) {
     node.render = CustomNode
@@ -208,13 +212,49 @@ const Layout: VFC<LayoutProps> = (prpops) => {
         })
       }
     }
+    sideMenu.push(node.id)
   }
   const handleClose = () => {
     toggle({ open: false, title: '', code: '' })
   }
+  const handleMenuClick = (
+    event: MouseEvent<HTMLAnchorElement>,
+    id: string
+  ) => {
+    document.getElementById(id)?.scrollIntoView()
+    setNavId(id)
+    event.preventDefault()
+  }
+  console.log(navId)
   return (
     <>
       <Drawer state={state} handleClose={handleClose} />
+      <aside
+        style={{
+          width: '160px',
+          height: '100vh',
+          position: 'fixed',
+          left: '0',
+          top: '0',
+          background: '#333130',
+          zIndex: '10',
+        }}
+      >
+        <ul style={{ height: '100%', overflow: 'scroll' }}>
+          {sideMenu.map((id) => (
+            <li key={id}>
+              <a
+                style={{
+                  color: id === navId ? 'yellow' : 'inherit',
+                }}
+                onClick={(event) => handleMenuClick(event, id)}
+              >
+                {id}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </aside>
       <CustomDiagram
         customDiagram={customSchema}
         initialSchema={initialSchema}
@@ -237,6 +277,7 @@ const CustomDiagram = ({
       style={{
         height: `${customDiagram.height}px`,
         width: `${customDiagram.width}px`,
+        marginLeft: '160px',
       }}
     >
       <Diagram schema={schema} onChange={onChange} />

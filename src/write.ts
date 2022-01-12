@@ -50,7 +50,7 @@ const makeHtml = (diagram: CustomDiagram) => {
     }
     a,
     a:visited {
-      color: white !important;
+      color: white;
     }
     a:hover {
       opacity: .7;
