@@ -4,6 +4,7 @@ import type {
   Node,
 } from 'beautiful-react-diagrams/@types/DiagramSchema'
 import 'beautiful-react-diagrams/styles.css'
+import classNames from 'classnames'
 import Prism from 'prismjs'
 import React, {
   ElementType,
@@ -16,6 +17,7 @@ import React, {
 import ReactDOM from 'react-dom'
 import { FaExternalLinkAlt, FaTimes } from 'react-icons/fa'
 import { GoSearch } from 'react-icons/go'
+import 'viewer.css'
 import { NODE_HEIGHT, NODE_WIDTH } from './constants'
 import type { CustomDiagram as CustomDiagramType, Data, Loc } from './types'
 
@@ -54,15 +56,7 @@ const Drawer: VFC<DrawerProps> = (props) => {
 
   const __html = Prism.highlight(code, Prism.languages.typescript, 'typescript')
   return (
-    <div
-      style={{
-        background: '#272822',
-        paddingLeft: '16px',
-        paddingTop: '18px',
-        overflow: 'scroll',
-      }}
-      className={className}
-    >
+    <div className={className}>
       <pre data-line={dataLine} className="language-typescript line-numbers">
         <code
           dangerouslySetInnerHTML={{
@@ -70,15 +64,7 @@ const Drawer: VFC<DrawerProps> = (props) => {
           }}
         ></code>
       </pre>
-      <a
-        style={{
-          position: 'absolute',
-          fontSize: '14px',
-          top: '8px',
-          left: '8px',
-        }}
-        onClick={handleClose}
-      >
+      <a className="drawerClose" onClick={handleClose}>
         <FaTimes />
       </a>
     </div>
@@ -139,30 +125,14 @@ const CustomNode: CustomNodeType = (props) => {
   return (
     <div
       id={id}
+      className="customNode"
       style={{
-        background: '#01060B',
-        borderRadius: '10px',
         height: `${NODE_HEIGHT}px`,
         width: `${NODE_WIDTH}px`,
-        border: 'solid 1px white',
-        padding: '10px',
-        boxSizing: 'border-box',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
       }}
     >
-      <div
-        style={{
-          color: 'white',
-          textOverflow: 'ellipsis',
-          overflow: 'hidden',
-          whiteSpace: 'nowrap',
-        }}
-      >
-        {data ? data.title : id}
-      </div>
-      <div style={{ textAlign: 'right' }}>
+      <div className="customNodeId">{data ? data.title : id}</div>
+      <div className="customNodeToolbar">
         <a onClick={handleShowDetail}>
           <GoSearch />
         </a>
@@ -225,28 +195,16 @@ const Layout: VFC<LayoutProps> = (prpops) => {
     setNavId(id)
     event.preventDefault()
   }
-  console.log(navId)
+
   return (
     <>
       <Drawer state={state} handleClose={handleClose} />
-      <aside
-        style={{
-          width: '160px',
-          height: '100vh',
-          position: 'fixed',
-          left: '0',
-          top: '0',
-          background: '#333130',
-          zIndex: '10',
-        }}
-      >
-        <ul style={{ height: '100%', overflow: 'scroll' }}>
+      <aside className="sideNavContainer">
+        <ul className="sideNav">
           {sideMenu.map((id) => (
             <li key={id}>
               <a
-                style={{
-                  color: id === navId ? 'yellow' : 'inherit',
-                }}
+                className={classNames('sideNavLink', { active: navId === id })}
                 onClick={(event) => handleMenuClick(event, id)}
               >
                 {id}
@@ -274,10 +232,10 @@ const CustomDiagram = ({
 
   return (
     <div
+      className="diagramWrapper"
       style={{
         height: `${customDiagram.height}px`,
         width: `${customDiagram.width}px`,
-        marginLeft: '160px',
       }}
     >
       <Diagram schema={schema} onChange={onChange} />
