@@ -66,7 +66,7 @@
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx}": [
-      "npx eslint . --fix",
+      "npx eslint . --fix  --ignore-path .gitignore",
       "npx prettier --write ."
     ]
   }
