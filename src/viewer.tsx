@@ -178,14 +178,14 @@ const Layout: VFC<LayoutProps> = (prpops) => {
   for (const node of initialSchema.nodes) {
     node.render = CustomNode
     if (node.data) {
-      const data = node.data
+      const { title, code, loc } = node.data
       node.data.handleShowDetail = () => {
         setNavId(node.id)
         toggle({
           open: state.open,
-          title: data.title,
-          code: data.code,
-          loc: data.loc,
+          title,
+          code,
+          loc,
         })
       }
     }
@@ -200,6 +200,18 @@ const Layout: VFC<LayoutProps> = (prpops) => {
   ) => {
     document.getElementById(id)?.scrollIntoView()
     setNavId(id)
+    if (state.open) {
+      const node = initialSchema.nodes.find((node) => node.id === id)
+      if (node && node.data) {
+        const { title, code, loc } = node.data
+        toggle({
+          open: state.open,
+          title,
+          code,
+          loc,
+        })
+      }
+    }
     event.preventDefault()
   }
 
