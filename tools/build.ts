@@ -22,6 +22,7 @@ build({
       css: true,
     }),
   ],
+  loader: { '.png': 'dataurl' },
 }).catch(() => process.exit(1))
 
 build({

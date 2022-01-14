@@ -62,7 +62,17 @@ div.code-toolbar > .toolbar {
   top: -4px;
 }
 
+.avatar {
+  height: 54px;
+  width: 54px;
+}
+.avatar > img {
+  height: 100%;
+  width: 100%;
+}
 .sideNavContainer {
+  display: flex;
+  flex-direction: column;
   width: 160px;
   height: 100vh;
   position: fixed;

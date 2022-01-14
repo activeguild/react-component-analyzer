@@ -19,8 +19,10 @@ import ReactDOM from 'react-dom'
 import { FaExternalLinkAlt, FaTimes } from 'react-icons/fa'
 import { GoSearch } from 'react-icons/go'
 import 'viewer.css'
+import url from './assets/avatar.png'
 import { NODE_HEIGHT, NODE_WIDTH } from './constants'
 import type { CustomDiagram as CustomDiagramType, Data, Loc } from './types'
+
 const NavContext = React.createContext<NavContext>({})
 type NavContext = {
   navId?: string
@@ -168,7 +170,7 @@ type LayoutProps = {
 
 const Layout: VFC<LayoutProps> = (prpops) => {
   const { customSchema, initialSchema } = prpops
-  const { state, toggle: toggle } = useDrawer()
+  const { state, toggle } = useDrawer()
   const [navId, setNavId] = useState('')
   const sideMenu: string[] = []
 
@@ -221,6 +223,9 @@ const Layout: VFC<LayoutProps> = (prpops) => {
     <NavContext.Provider value={navContextValue}>
       <Drawer state={state} handleClose={handleClose} />
       <aside className="sideNavContainer">
+        <div className="avatar">
+          <img src={url} alt="avatar" />
+        </div>
         <ul className="sideNav">
           {sideMenu.map((id) => (
             <li key={id}>

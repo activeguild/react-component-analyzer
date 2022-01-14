@@ -22,6 +22,7 @@ build({
       css: true,
     }),
   ],
+  loader: { '.png': 'dataurl' },
   watch: {
     onRebuild: (error) => {
       if (error) {
