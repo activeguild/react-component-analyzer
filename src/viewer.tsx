@@ -11,6 +11,7 @@ import React, {
   MouseEvent,
   ReactNode,
   useCallback,
+  useContext,
   useState,
   VFC,
 } from 'react'
@@ -20,6 +21,11 @@ import { GoSearch } from 'react-icons/go'
 import 'viewer.css'
 import { NODE_HEIGHT, NODE_WIDTH } from './constants'
 import type { CustomDiagram as CustomDiagramType, Data, Loc } from './types'
+const NavContext = React.createContext<NavContext>({})
+type NavContext = {
+  navId?: string
+  setNavId?: React.Dispatch<React.SetStateAction<string>>
+}
 
 const App = () => {
   const initialSchema = createSchema(diagram.schema)
@@ -117,15 +123,12 @@ const CustomNode: CustomNodeType = (props) => {
   const { id, data } = props
   const { fileName, handleShowDetail } = data || {
     fileName: '',
-    handleShowDetail: () => {
-      // default
-    },
   }
-
+  const { navId } = useContext(NavContext)
   return (
     <div
       id={id}
-      className="customNode"
+      className={classNames('customNode', { active: id === navId })}
       style={{
         height: `${NODE_HEIGHT}px`,
         width: `${NODE_WIDTH}px`,
@@ -172,13 +175,14 @@ const Layout: VFC<LayoutProps> = (prpops) => {
   for (const node of initialSchema.nodes) {
     node.render = CustomNode
     if (node.data) {
-      const data = node.data
+      const { title, code, loc } = node.data
       node.data.handleShowDetail = () => {
+        setNavId(node.id)
         toggle({
           open: state.open,
-          title: data.title,
-          code: data.code,
-          loc: data.loc,
+          title,
+          code,
+          loc,
         })
       }
     }
@@ -193,11 +197,28 @@ const Layout: VFC<LayoutProps> = (prpops) => {
   ) => {
     document.getElementById(id)?.scrollIntoView()
     setNavId(id)
+    if (state.open) {
+      const node = initialSchema.nodes.find((node) => node.id === id)
+      if (node && node.data) {
+        const { title, code, loc } = node.data
+        toggle({
+          open: state.open,
+          title,
+          code,
+          loc,
+        })
+      }
+    }
     event.preventDefault()
   }
 
+  const navContextValue = {
+    navId,
+    setNavId,
+  }
+
   return (
-    <>
+    <NavContext.Provider value={navContextValue}>
       <Drawer state={state} handleClose={handleClose} />
       <aside className="sideNavContainer">
         <ul className="sideNav">
@@ -217,7 +238,7 @@ const Layout: VFC<LayoutProps> = (prpops) => {
         customDiagram={customSchema}
         initialSchema={initialSchema}
       />
-    </>
+    </NavContext.Provider>
   )
 }
 
