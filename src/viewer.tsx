@@ -180,6 +180,7 @@ const Layout: VFC<LayoutProps> = (prpops) => {
     if (node.data) {
       const data = node.data
       node.data.handleShowDetail = () => {
+        setNavId(node.id)
         toggle({
           open: state.open,
           title: data.title,
