@@ -203,13 +203,13 @@ const Layout: VFC<LayoutProps> = (prpops) => {
     event.preventDefault()
   }
 
-  const value = {
+  const navContextValue = {
     navId,
     setNavId,
   }
 
   return (
-    <NavContext.Provider value={value}>
+    <NavContext.Provider value={navContextValue}>
       <Drawer state={state} handleClose={handleClose} />
       <aside className="sideNavContainer">
         <ul className="sideNav">
