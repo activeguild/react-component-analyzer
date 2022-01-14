@@ -4,8 +4,8 @@
   "description": "Analyze the component tree of react and displays it as a diagram in the browser. You can refer to the corresponding code from the diagram.",
   "main": "cli.js",
   "scripts": {
-    "build": "rimraf dist && node -r esbuild-register ./tools/build.ts && cp -r ./vendor ./dist",
-    "watch": "rimraf dist && node -r esbuild-register ./tools/watch.ts && cp -r ./vendor ./dist",
+    "build": "rimraf dist && node -r esbuild-register ./tools/build.ts",
+    "watch": "rimraf dist && node -r esbuild-register ./tools/watch.ts",
     "eslint": "eslint '**/*.{js,jsx,ts,tsx}' --ignore-path .gitignore",
     "prettier": "prettier . --write",
     "prepare": "husky install",
