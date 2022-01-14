@@ -11,6 +11,7 @@ import React, {
   MouseEvent,
   ReactNode,
   useCallback,
+  useContext,
   useState,
   VFC,
 } from 'react'
@@ -20,6 +21,11 @@ import { GoSearch } from 'react-icons/go'
 import 'viewer.css'
 import { NODE_HEIGHT, NODE_WIDTH } from './constants'
 import type { CustomDiagram as CustomDiagramType, Data, Loc } from './types'
+const NavContext = React.createContext<NavContext>({})
+type NavContext = {
+  navId?: string
+  setNavId?: React.Dispatch<React.SetStateAction<string>>
+}
 
 const App = () => {
   const initialSchema = createSchema(diagram.schema)
@@ -121,11 +127,11 @@ const CustomNode: CustomNodeType = (props) => {
       // default
     },
   }
-
+  const { navId } = useContext(NavContext)
   return (
     <div
       id={id}
-      className="customNode"
+      className={classNames('customNode', { active: id === navId })}
       style={{
         height: `${NODE_HEIGHT}px`,
         width: `${NODE_WIDTH}px`,
@@ -196,8 +202,13 @@ const Layout: VFC<LayoutProps> = (prpops) => {
     event.preventDefault()
   }
 
+  const value = {
+    navId,
+    setNavId,
+  }
+
   return (
-    <>
+    <NavContext.Provider value={value}>
       <Drawer state={state} handleClose={handleClose} />
       <aside className="sideNavContainer">
         <ul className="sideNav">
@@ -217,7 +228,7 @@ const Layout: VFC<LayoutProps> = (prpops) => {
         customDiagram={customSchema}
         initialSchema={initialSchema}
       />
-    </>
+    </NavContext.Provider>
   )
 }
 

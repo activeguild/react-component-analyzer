@@ -96,6 +96,9 @@ div.code-toolbar > .toolbar {
   flex-direction: column;
   justify-content: space-between;
 }
+.customNode.active {
+  border-color: yellow;
+}
 
 .customNodeId {
   color: white;
