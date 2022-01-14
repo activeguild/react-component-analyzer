@@ -1,11 +1,11 @@
 {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnPaste": true,
-    "editor.formatOnSave": true,
-    "editor.formatOnType": true,
-    "editor.codeActionsOnSave": [
-      "source.organizeImports",
-      "source.fixAll.eslint"
-    ],
-    "typescript.tsdk": "node_modules/typescript/lib"
-  }
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.codeActionsOnSave": [
+    "source.organizeImports",
+    "source.fixAll.eslint"
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
