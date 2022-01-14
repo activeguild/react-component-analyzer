@@ -63,8 +63,8 @@ div.code-toolbar > .toolbar {
 }
 
 .avatar {
-  height: 40px;
-  width: 54px;
+  height: 54px;
+  width: 40px;
 }
 .avatar > img {
   height: 100%;
