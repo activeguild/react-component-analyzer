@@ -123,9 +123,6 @@ const CustomNode: CustomNodeType = (props) => {
   const { id, data } = props
   const { fileName, handleShowDetail } = data || {
     fileName: '',
-    handleShowDetail: () => {
-      // default
-    },
   }
   const { navId } = useContext(NavContext)
   return (
