@@ -35,6 +35,8 @@ const App = () => {
   for (const node of initialSchema.nodes) {
     if (node.data) {
       node.data.vscode = diagram.vscode
+      node.inputs = [{ id: `${node.id}-input` }]
+      node.outputs = [{ id: `${node.id}-output` }]
     }
     node.render = CustomNode
   }
@@ -122,7 +124,7 @@ type CustomNodeType = (
 ) => ElementType | ReactNode
 
 const CustomNode: CustomNodeType = (props) => {
-  const { id, data } = props
+  const { id, data, inputs, outputs } = props
   const { fileName, handleShowDetail } = data || {
     fileName: '',
   }
@@ -136,6 +138,20 @@ const CustomNode: CustomNodeType = (props) => {
         width: `${NODE_WIDTH}px`,
       }}
     >
+      <div
+        style={{
+          marginTop: '-10px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        }}
+      >
+        {outputs &&
+          outputs.map((port: any) =>
+            React.cloneElement(port, {
+              style: { width: '16px', height: '16px', background: '#1B263B' },
+            })
+          )}
+      </div>
       <div className="customNodeId">{data ? data.title : id}</div>
       <div className="customNodeToolbar">
         <a onClick={handleShowDetail}>
@@ -158,6 +174,20 @@ const CustomNode: CustomNodeType = (props) => {
         ) : (
           <></>
         )}
+      </div>
+      <div
+        style={{
+          marginBottom: '-10px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        }}
+      >
+        {inputs &&
+          inputs.map((port: any) =>
+            React.cloneElement(port, {
+              style: { width: '16px', height: '16px', background: '#1B263B' },
+            })
+          )}
       </div>
     </div>
   )
