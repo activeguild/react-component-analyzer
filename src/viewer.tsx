@@ -6,6 +6,7 @@ import type {
 import 'beautiful-react-diagrams/styles.css'
 import Avatar from 'boring-avatars'
 import classNames from 'classnames'
+import 'modern-css-reset/dist/reset.min.css'
 import Prism from 'prismjs'
 import React, {
   ElementType,
