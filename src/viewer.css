@@ -84,8 +84,22 @@ div.code-toolbar > .toolbar {
 .sideNav {
   height: 100%;
   overflow: scroll;
+  list-style: none;
+  padding: 0 0 0 20px;
+  margin: 0;
+}
+.sideNav li {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sideNavItem {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .sideNavLink {
+  margin-left: 8px;
   color: inherit;
 }
 .sideNavLink.active {

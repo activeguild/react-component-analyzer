@@ -4,6 +4,7 @@ import type {
   Node,
 } from 'beautiful-react-diagrams/@types/DiagramSchema'
 import 'beautiful-react-diagrams/styles.css'
+import Avatar from 'boring-avatars'
 import classNames from 'classnames'
 import Prism from 'prismjs'
 import React, {
@@ -22,7 +23,6 @@ import 'viewer.css'
 import url from './assets/avatar.png'
 import { NODE_HEIGHT, NODE_WIDTH } from './constants'
 import type { CustomDiagram as CustomDiagramType, Data, Loc } from './types'
-
 const NavContext = React.createContext<NavContext>({})
 type NavContext = {
   navId?: string
@@ -258,7 +258,13 @@ const Layout: VFC<LayoutProps> = (prpops) => {
         </div>
         <ul className="sideNav">
           {sideMenu.map((id) => (
-            <li key={id}>
+            <li className="sideNavItem" key={id}>
+              <Avatar
+                size={6}
+                name={id}
+                variant="marble"
+                colors={['#92A1C6', '#146A7C', '#F0AB3D', '#C271B4', '#C20D90']}
+              />
               <a
                 className={classNames('sideNavLink', { active: navId === id })}
                 onClick={(event) => handleMenuClick(event, id)}
