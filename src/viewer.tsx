@@ -23,6 +23,7 @@ import { GoSearch } from 'react-icons/go'
 import 'viewer.css'
 import { NODE_HEIGHT, NODE_WIDTH } from './constants'
 import type { CustomDiagram as CustomDiagramType, Data, Loc } from './types'
+
 const NavContext = React.createContext<NavContext>({})
 type NavContext = {
   navId?: string
@@ -293,8 +294,8 @@ const CustomDiagram = ({
     <div
       className="diagramWrapper"
       style={{
-        height: `${customDiagram.height}px`,
-        width: `${customDiagram.width}px`,
+        height: `${customDiagram.height + 1000}px`,
+        width: `${customDiagram.width + 1000}px`,
       }}
     >
       <Diagram schema={schema} onChange={onChange} />
