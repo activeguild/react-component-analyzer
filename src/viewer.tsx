@@ -21,7 +21,6 @@ import ReactDOM from 'react-dom'
 import { FaExternalLinkAlt, FaTimes } from 'react-icons/fa'
 import { GoSearch } from 'react-icons/go'
 import 'viewer.css'
-import url from './assets/avatar.png'
 import { NODE_HEIGHT, NODE_WIDTH } from './constants'
 import type { CustomDiagram as CustomDiagramType, Data, Loc } from './types'
 const NavContext = React.createContext<NavContext>({})
@@ -254,9 +253,6 @@ const Layout: VFC<LayoutProps> = (prpops) => {
     <NavContext.Provider value={navContextValue}>
       <Drawer state={state} handleClose={handleClose} />
       <aside className="sideNavContainer">
-        <div className="avatar">
-          <img src={url} alt="avatar" />
-        </div>
         <ul className="sideNav">
           {sideMenu.map((id) => (
             <li className="sideNavItem" key={id}>

@@ -61,15 +61,6 @@ a:hover {
 div.code-toolbar > .toolbar {
   top: -4px;
 }
-
-.avatar {
-  height: 54px;
-  width: 40px;
-}
-.avatar > img {
-  height: 100%;
-  width: 100%;
-}
 .sideNavContainer {
   display: flex;
   flex-direction: column;
@@ -85,7 +76,7 @@ div.code-toolbar > .toolbar {
   height: 100%;
   overflow: scroll;
   list-style: none;
-  padding: 0 0 0 20px;
+  padding: 20 0 0 20px;
   margin: 0;
 }
 .sideNav li {

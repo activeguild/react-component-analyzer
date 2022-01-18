@@ -21,7 +21,6 @@ export const defaultOptionsForViewer: BuildOptions = {
       css: true,
     }),
   ],
-  loader: { '.png': 'dataurl' },
 }
 
 export const defaultOptionsForCli: BuildOptions = {
