@@ -76,7 +76,7 @@ div.code-toolbar > .toolbar {
   height: 100%;
   overflow: scroll;
   list-style: none;
-  padding: 20px 0 0 20px;
+  padding: 20px 20px 0 20px;
   margin: 0;
 }
 .sideNav li {
