@@ -130,6 +130,8 @@ const CustomNode: CustomNodeType = (props) => {
     fileName: '',
   }
   const { navId } = useContext(NavContext)
+  const [title, setTitle] = useState(data?.title)
+
   return (
     <div
       id={id}
@@ -154,7 +156,15 @@ const CustomNode: CustomNodeType = (props) => {
             })
           )}
       </div>
-      <div className="customNodeId">{data ? data.title : id}</div>
+      {data && data.code ? (
+        <div className="customNodeId">{title}</div>
+      ) : (
+        <input
+          type="text"
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
+        />
+      )}
       <div className="customNodeToolbar">
         {data && data.code ? (
           <a onClick={handleShowDetail}>
