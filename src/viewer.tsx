@@ -146,10 +146,10 @@ const CustomNode: CustomNodeType = (props) => {
           marginRight: 'auto',
         }}
       >
-        {outputs &&
-          outputs.map((port: any) =>
+        {inputs &&
+          inputs.map((port: any) =>
             React.cloneElement(port, {
-              style: { width: '16px', height: '16px', background: '#1B263B' },
+              style: { width: '60px', height: '16px', background: '#1B263B' },
             })
           )}
       </div>
@@ -187,10 +187,10 @@ const CustomNode: CustomNodeType = (props) => {
           marginRight: 'auto',
         }}
       >
-        {inputs &&
-          inputs.map((port: any) =>
+        {outputs &&
+          outputs.map((port: any) =>
             React.cloneElement(port, {
-              style: { width: '16px', height: '16px', background: '#1B263B' },
+              style: { width: '60px', height: '16px', background: '#1B263B' },
             })
           )}
       </div>
