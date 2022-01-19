@@ -156,7 +156,10 @@ const CustomNode: CustomNodeType = (props) => {
       <div className="customNodeId">{data ? data.title : id}</div>
       <div className="customNodeToolbar">
         {data && data.code ? (
-          <a onClick={handleShowDetail}>
+          <a
+            onClick={handleShowDetail}
+            onDoubleClick={(event) => event.stopPropagation()}
+          >
             <GoSearch />
           </a>
         ) : (
