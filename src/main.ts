@@ -135,7 +135,7 @@ const convertToFinalNode = (
         })
         x = convertToFinalNode(child, nodes, links, x, y + NEXT_NODE_POSITION_Y)
       }
-      links.push({ input: `${parentNode.id}-input`, output: `${id}-output` })
+      links.push({ input: `${parentNode.id}-output`, output: `${id}-input` })
     }
   }
 

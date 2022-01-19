@@ -23,6 +23,7 @@ import { GoSearch } from 'react-icons/go'
 import 'viewer.css'
 import { NODE_HEIGHT, NODE_WIDTH } from './constants'
 import type { CustomDiagram as CustomDiagramType, Data, Loc } from './types'
+
 const NavContext = React.createContext<NavContext>({})
 type NavContext = {
   navId?: string
@@ -129,6 +130,8 @@ const CustomNode: CustomNodeType = (props) => {
     fileName: '',
   }
   const { navId } = useContext(NavContext)
+  const [title, setTitle] = useState(data?.title)
+
   return (
     <div
       id={id}
@@ -137,6 +140,7 @@ const CustomNode: CustomNodeType = (props) => {
         height: `${NODE_HEIGHT}px`,
         width: `${NODE_WIDTH}px`,
       }}
+      onDoubleClick={(event) => event.stopPropagation()}
     >
       <div
         style={{
@@ -145,18 +149,30 @@ const CustomNode: CustomNodeType = (props) => {
           marginRight: 'auto',
         }}
       >
-        {outputs &&
-          outputs.map((port: any) =>
+        {inputs &&
+          inputs.map((port: any) =>
             React.cloneElement(port, {
-              style: { width: '16px', height: '16px', background: '#1B263B' },
+              style: { width: '60px', height: '16px', background: '#1B263B' },
             })
           )}
       </div>
-      <div className="customNodeId">{data ? data.title : id}</div>
+      {data && data.code ? (
+        <div className="customNodeId">{title}</div>
+      ) : (
+        <input
+          type="text"
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
+        />
+      )}
       <div className="customNodeToolbar">
-        <a onClick={handleShowDetail}>
-          <GoSearch />
-        </a>
+        {data && data.code ? (
+          <a onClick={handleShowDetail}>
+            <GoSearch />
+          </a>
+        ) : (
+          <></>
+        )}
         {data && data.vscode ? (
           <a
             href={fileName}
@@ -182,10 +198,10 @@ const CustomNode: CustomNodeType = (props) => {
           marginRight: 'auto',
         }}
       >
-        {inputs &&
-          inputs.map((port: any) =>
+        {outputs &&
+          outputs.map((port: any) =>
             React.cloneElement(port, {
-              style: { width: '16px', height: '16px', background: '#1B263B' },
+              style: { width: '60px', height: '16px', background: '#1B263B' },
             })
           )}
       </div>
@@ -227,7 +243,7 @@ const Layout: VFC<LayoutProps> = (prpops) => {
     event: MouseEvent<HTMLAnchorElement>,
     id: string
   ) => {
-    document.getElementById(id)?.scrollIntoView()
+    document.getElementById(id)?.scrollIntoView({ block: 'center' })
     setNavId(id)
     if (state.open) {
       const node = initialSchema.nodes.find((node) => node.id === id)
@@ -288,14 +304,38 @@ const CustomDiagram = ({
   initialSchema: DiagramSchema<Data>
 }) => {
   const [schema, { onChange }] = useSchema<any>(initialSchema)
+  const [addCount, setAddCount] = useState<number>(1)
+
+  const handleBackgroundDoubleClick: React.MouseEventHandler<HTMLDivElement> = (
+    event
+  ) => {
+    const { clientX, clientY } = event
+    const id = `Add${addCount}`
+    onChange({
+      ...schema,
+      nodes: [
+        ...schema.nodes,
+        {
+          id,
+          coordinates: [clientX - 160, clientY],
+          inputs: [{ id: `${id}-input` }],
+          outputs: [{ id: `${id}-input` }],
+          render: CustomNode,
+          data: { title: id },
+        },
+      ],
+    })
+    setAddCount(addCount + 1)
+  }
 
   return (
     <div
       className="diagramWrapper"
       style={{
-        height: `${customDiagram.height}px`,
-        width: `${customDiagram.width}px`,
+        height: `${customDiagram.height + 1000}px`,
+        width: `${customDiagram.width + 1000}px`,
       }}
+      onDoubleClick={handleBackgroundDoubleClick}
     >
       <Diagram schema={schema} onChange={onChange} />
     </div>
