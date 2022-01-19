@@ -23,6 +23,14 @@ You can refer to the corresponding code from the diagram.
 - If you are using vite without setting it in the config file, you can resolve the alias from vite.config.ts.
 - It uses [prismjs](https://github.com/PrismJS/prism/), which allows for code reading that is more like an IDE.
 
+## On Daiagram
+
+- You can check the code of the component.
+- Reference to VS Code allows code to be referenced in VS Code.
+- New nodes can be added by double-clicking on a background other than the component.
+- Links between each node can be removed by double-clicking.
+- Dragging from the top and bottom of a node to another node to link to it.
+
 ## Install
 
 ```bash

@@ -165,32 +165,33 @@ const CustomNode: CustomNodeType = (props) => {
           onChange={(event) => setTitle(event.target.value)}
         />
       )}
-      <div className="customNodeToolbar">
-        {data && data.code ? (
+      {data && data.code ? (
+        <div className="customNodeToolbar">
           <a onClick={handleShowDetail}>
             <GoSearch />
           </a>
-        ) : (
-          <></>
-        )}
-        {data && data.vscode ? (
-          <a
-            href={fileName}
-            onClick={(event) => {
-              if (data) {
-                const { loc } = data
-                location.href = `vscode://file/${fileName}:${loc.start.line}:${loc.start.column}`
 
-                event.preventDefault()
-              }
-            }}
-          >
-            <FaExternalLinkAlt />
-          </a>
-        ) : (
-          <></>
-        )}
-      </div>
+          {data && data.vscode ? (
+            <a
+              href={fileName}
+              onClick={(event) => {
+                if (data) {
+                  const { loc } = data
+                  location.href = `vscode://file/${fileName}:${loc.start.line}:${loc.start.column}`
+
+                  event.preventDefault()
+                }
+              }}
+            >
+              <FaExternalLinkAlt />
+            </a>
+          ) : (
+            <></>
+          )}
+        </div>
+      ) : (
+        <></>
+      )}
       <div
         style={{
           marginBottom: '-10px',
