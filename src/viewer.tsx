@@ -299,7 +299,7 @@ const CustomDiagram = ({
     event
   ) => {
     const { clientX, clientY } = event
-    const id = `add${addCount}`
+    const id = `Add${addCount}`
     onChange({
       ...schema,
       nodes: [
