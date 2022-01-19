@@ -138,6 +138,7 @@ const CustomNode: CustomNodeType = (props) => {
         height: `${NODE_HEIGHT}px`,
         width: `${NODE_WIDTH}px`,
       }}
+      onDoubleClick={(event) => event.stopPropagation()}
     >
       <div
         style={{
@@ -156,10 +157,7 @@ const CustomNode: CustomNodeType = (props) => {
       <div className="customNodeId">{data ? data.title : id}</div>
       <div className="customNodeToolbar">
         {data && data.code ? (
-          <a
-            onClick={handleShowDetail}
-            onDoubleClick={(event) => event.stopPropagation()}
-          >
+          <a onClick={handleShowDetail}>
             <GoSearch />
           </a>
         ) : (
@@ -176,7 +174,6 @@ const CustomNode: CustomNodeType = (props) => {
                 event.preventDefault()
               }
             }}
-            onDoubleClick={(event) => event.stopPropagation()}
           >
             <FaExternalLinkAlt />
           </a>
