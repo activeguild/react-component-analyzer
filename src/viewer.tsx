@@ -176,6 +176,7 @@ const CustomNode: CustomNodeType = (props) => {
                 event.preventDefault()
               }
             }}
+            onDoubleClick={(event) => event.stopPropagation()}
           >
             <FaExternalLinkAlt />
           </a>
