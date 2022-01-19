@@ -228,7 +228,7 @@ const Layout: VFC<LayoutProps> = (prpops) => {
     event: MouseEvent<HTMLAnchorElement>,
     id: string
   ) => {
-    document.getElementById(id)?.scrollIntoView()
+    document.getElementById(id)?.scrollIntoView({ block: 'center' })
     setNavId(id)
     if (state.open) {
       const node = initialSchema.nodes.find((node) => node.id === id)
