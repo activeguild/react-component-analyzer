@@ -155,9 +155,13 @@ const CustomNode: CustomNodeType = (props) => {
       </div>
       <div className="customNodeId">{data ? data.title : id}</div>
       <div className="customNodeToolbar">
-        <a onClick={handleShowDetail}>
-          <GoSearch />
-        </a>
+        {data && data.code ? (
+          <a onClick={handleShowDetail}>
+            <GoSearch />
+          </a>
+        ) : (
+          <></>
+        )}
         {data && data.vscode ? (
           <a
             href={fileName}
@@ -289,6 +293,29 @@ const CustomDiagram = ({
   initialSchema: DiagramSchema<Data>
 }) => {
   const [schema, { onChange }] = useSchema<any>(initialSchema)
+  const [addCount, setAddCount] = useState<number>(1)
+
+  const handleBackgroundDoubleClick: React.MouseEventHandler<HTMLDivElement> = (
+    event
+  ) => {
+    const { clientX, clientY } = event
+    const id = `add${addCount}`
+    onChange({
+      ...schema,
+      nodes: [
+        ...schema.nodes,
+        {
+          id,
+          coordinates: [clientX - 160, clientY],
+          inputs: [{ id: `${id}-input` }],
+          outputs: [{ id: `${id}-input` }],
+          render: CustomNode,
+          data: { title: id },
+        },
+      ],
+    })
+    setAddCount(addCount + 1)
+  }
 
   return (
     <div
@@ -297,22 +324,7 @@ const CustomDiagram = ({
         height: `${customDiagram.height + 1000}px`,
         width: `${customDiagram.width + 1000}px`,
       }}
-      onDoubleClick={(event) => {
-        const { clientX, clientY } = event
-        onChange({
-          ...schema,
-          nodes: [
-            ...schema.nodes,
-            {
-              id: 'add1',
-              coordinates: [clientX - 160, clientY],
-              inputs: [{ id: `add1-input` }],
-              outputs: [{ id: `add1-input` }],
-              render: CustomNode,
-            },
-          ],
-        })
-      }}
+      onDoubleClick={handleBackgroundDoubleClick}
     >
       <Diagram schema={schema} onChange={onChange} />
     </div>
