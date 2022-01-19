@@ -297,6 +297,22 @@ const CustomDiagram = ({
         height: `${customDiagram.height + 1000}px`,
         width: `${customDiagram.width + 1000}px`,
       }}
+      onDoubleClick={(event) => {
+        const { clientX, clientY } = event
+        onChange({
+          ...schema,
+          nodes: [
+            ...schema.nodes,
+            {
+              id: 'add1',
+              coordinates: [clientX - 160, clientY],
+              inputs: [{ id: `add1-input` }],
+              outputs: [{ id: `add1-input` }],
+              render: CustomNode,
+            },
+          ],
+        })
+      }}
     >
       <Diagram schema={schema} onChange={onChange} />
     </div>
