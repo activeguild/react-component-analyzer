@@ -42,7 +42,7 @@ npm i -D visualize-react-component
 By specifying the React root file and the component files, it will parse them and output the `stats.html` file.
 
 ```
-npm run virot ./src/main.tsx
+npx virot ./src/main.tsx
 ```
 
 ## Config
