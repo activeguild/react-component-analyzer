@@ -1,7 +1,7 @@
 import { AST_NODE_TYPES } from '@typescript-eslint/typescript-estree'
 import type { Link, Node } from 'beautiful-react-diagrams/@types/DiagramSchema'
-import chalk from 'chalk'
 import path from 'path'
+import pc from 'picocolors'
 import { analyze } from './analyze'
 import { loadVite, resolveFinalConfig } from './config'
 import {
@@ -99,7 +99,9 @@ export const main = async (fileName: string, config: Config) => {
 
     writeHtml(diagram)
   } catch (e) {
-    console.log(chalk.red(`e: ${e}`))
+    if (e instanceof Error) {
+      console.log(pc.red(e.message))
+    }
   } finally {
     process.exit()
   }

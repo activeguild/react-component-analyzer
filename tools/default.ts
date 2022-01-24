@@ -31,7 +31,7 @@ export const defaultOptionsForCli: BuildOptions = {
   platform: 'node',
   external: [
     'path',
-    'chalk',
+    'picocolors',
     'commander',
     'fs',
     '@typescript-eslint/typescript-estree',
