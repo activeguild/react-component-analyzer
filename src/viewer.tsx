@@ -142,17 +142,11 @@ const CustomNode: CustomNodeType = (props) => {
       }}
       onDoubleClick={(event) => event.stopPropagation()}
     >
-      <div
-        style={{
-          marginTop: '-10px',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-        }}
-      >
+      <div className="customNodeInput">
         {inputs &&
           inputs.map((port: any) =>
             React.cloneElement(port, {
-              style: { width: '60px', height: '16px', background: '#1B263B' },
+              style: { width: '40px', height: '16px', background: '#1B263B' },
             })
           )}
       </div>
@@ -192,17 +186,11 @@ const CustomNode: CustomNodeType = (props) => {
       ) : (
         <></>
       )}
-      <div
-        style={{
-          marginBottom: '-10px',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-        }}
-      >
+      <div className="customNodeOutput">
         {outputs &&
           outputs.map((port: any) =>
             React.cloneElement(port, {
-              style: { width: '60px', height: '16px', background: '#1B263B' },
+              style: { width: '40px', height: '16px', background: '#1B263B' },
             })
           )}
       </div>
