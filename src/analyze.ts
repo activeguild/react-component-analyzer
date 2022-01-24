@@ -11,9 +11,9 @@ import type {
   VariableDeclaration,
 } from '@typescript-eslint/types/dist/ast-spec'
 import { AST_NODE_TYPES, parse } from '@typescript-eslint/typescript-estree'
-import chalk from 'chalk'
 import fs from 'fs'
 import path from 'path'
+import pc from 'picocolors'
 import { resolveAlias } from './config'
 import { EXTENTIONS } from './constants'
 import { Alias, ExtentionNode, LineColumn, LoadedFile } from './types'
@@ -81,7 +81,9 @@ export const analyze = (
       }
     }
   } catch (e) {
-    console.log(chalk.red(e))
+    if (e instanceof Error) {
+      console.log(pc.red(e.message))
+    }
     parentNode.exists = false
   }
 }

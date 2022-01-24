@@ -1,12 +1,12 @@
-import chalk from 'chalk'
 import { writeFileSync } from 'fs'
 import path from 'path'
+import pc from 'picocolors'
 import { CustomDiagram } from './types'
 
 export const writeHtml = (diagram: CustomDiagram): void => {
   const outputFilePath = path.resolve(path.resolve(), './stats.html')
   writeFileSync(outputFilePath, makeHtml(diagram))
-  console.log(chalk.green(`Success. ${outputFilePath}`))
+  console.log(pc.green(`Success. ${outputFilePath}`))
   return
 }
 
