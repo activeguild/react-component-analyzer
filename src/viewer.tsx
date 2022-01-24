@@ -298,6 +298,12 @@ const CustomDiagram = ({
   const handleBackgroundDoubleClick: React.MouseEventHandler<HTMLDivElement> = (
     event
   ) => {
+    if (
+      (event.target as Element).classList.contains('bi-link-ghost') ||
+      (event.target as Element).classList.contains('bi-diagram-link')
+    ) {
+      return
+    }
     const { clientX, clientY } = event
     const id = `Add${addCount}`
     onChange({
