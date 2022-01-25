@@ -11,6 +11,9 @@ body {
   border: none !important;
   box-shadow: none !important;
 }
+.bi.bi-diagram .bi-link-canvas-layer .bi-diagram-link .bi-link-path {
+  stroke-width: 0.12rem;
+}
 a {
   padding: 4px;
   cursor: pointer;
