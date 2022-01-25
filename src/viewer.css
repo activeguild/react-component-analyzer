@@ -6,10 +6,18 @@ body {
   background: #01060b;
 }
 .bi.bi-diagram {
-  background-color: #01060b !important;
+  background-color: #282a37 !important;
   overflow: scroll !important;
   border: none !important;
   box-shadow: none !important;
+}
+.bi.bi-diagram .bi-link-canvas-layer .bi-diagram-link .bi-link-path {
+  stroke-width: 0.12rem;
+  stroke: url(#header-shape-gradient) #fff;
+}
+#header-shape-gradient {
+  --color-stop: #f12c06;
+  --color-bot: #faed34;
 }
 a {
   padding: 4px;
@@ -103,13 +111,13 @@ div.code-toolbar > .toolbar {
 
 .customNode {
   background: #01060b;
-  border-radius: 10px;
-  border: solid 1px white;
+  border-radius: 4px;
   padding: 10px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  box-shadow: 2px 2px 4px #01060b;
 }
 .customNodeInput {
   margin-top: -10px;
@@ -128,7 +136,7 @@ div.code-toolbar > .toolbar {
   opacity: 0.7;
 }
 .customNode.active {
-  border-color: yellow;
+  border: solid 1px yellow;
 }
 
 .customNodeId {
