@@ -13,6 +13,11 @@ body {
 }
 .bi.bi-diagram .bi-link-canvas-layer .bi-diagram-link .bi-link-path {
   stroke-width: 0.12rem;
+  stroke: url(#header-shape-gradient) #fff;
+}
+#header-shape-gradient {
+  --color-stop: #f12c06;
+  --color-bot: #faed34;
 }
 a {
   padding: 4px;
