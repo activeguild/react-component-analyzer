@@ -3,7 +3,7 @@ body {
     Meiryo, Osaka, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
   color: white !important;
   font-size: 11px;
-  background: #01060b;
+  background: #282a37;
 }
 .bi.bi-diagram {
   background-color: #282a37 !important;
@@ -78,7 +78,7 @@ div.code-toolbar > .toolbar {
   left: 0;
   top: 0;
   background: #333130;
-  z-index: 10;
+  z-index: 200;
 }
 .sideNav {
   height: 100%;
