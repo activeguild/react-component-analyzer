@@ -3,6 +3,7 @@ import { defaultOptionsForCli, defaultOptionsForViewer } from './default'
 
 build({
   ...defaultOptionsForViewer,
+  minify: false,
   watch: {
     onRebuild: (error) => {
       if (error) {
@@ -21,6 +22,7 @@ build({
 
 build({
   ...defaultOptionsForCli,
+  minify: false,
   watch: {
     onRebuild: (error) => {
       if (error) {
