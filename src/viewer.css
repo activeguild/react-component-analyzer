@@ -78,7 +78,7 @@ div.code-toolbar > .toolbar {
   left: 0;
   top: 0;
   background: #333130;
-  z-index: 10;
+  z-index: 200;
 }
 .sideNav {
   height: 100%;
