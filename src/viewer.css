@@ -102,7 +102,7 @@ div.code-toolbar > .toolbar {
   color: inherit;
 }
 .sideNavLink.active {
-  color: yellow;
+  color: #00ff11;
 }
 
 .diagramWrapper {
@@ -136,7 +136,7 @@ div.code-toolbar > .toolbar {
   opacity: 0.7;
 }
 .customNode.active {
-  border: solid 1px yellow;
+  border: solid 1px #00ff11;
 }
 
 .customNodeId {
