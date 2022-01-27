@@ -24,7 +24,6 @@ import ReactTooltip from 'react-tooltip'
 import 'viewer.css'
 import { NODE_HEIGHT, NODE_WIDTH } from './constants'
 import type { CustomDiagram as CustomDiagramType, Data, Loc } from './types'
-
 const NavContext = React.createContext<NavContext>({})
 type NavContext = {
   navId?: string
@@ -143,7 +142,7 @@ const CustomNode: CustomNodeType = (props) => {
       }}
       onDoubleClick={(event) => event.stopPropagation()}
       data-tip={id}
-      data-for="user-name"
+      data-for="component-name"
     >
       <div className="customNodeInput">
         {inputs &&
@@ -197,7 +196,6 @@ const CustomNode: CustomNodeType = (props) => {
             })
           )}
       </div>
-      <ReactTooltip id="user-name" />
     </div>
   )
 }
@@ -266,7 +264,12 @@ const Layout: VFC<LayoutProps> = (prpops) => {
       <aside className="sideNavContainer">
         <ul className="sideNav">
           {sideMenu.map((id) => (
-            <li className="sideNavItem" key={id}>
+            <li
+              className="sideNavItem"
+              key={id}
+              data-tip={id}
+              data-for="component-name"
+            >
               <Avatar
                 size={6}
                 name={id}
@@ -287,6 +290,7 @@ const Layout: VFC<LayoutProps> = (prpops) => {
         customDiagram={customSchema}
         initialSchema={initialSchema}
       />
+      <ReactTooltip id="component-name" />
     </NavContext.Provider>
   )
 }
