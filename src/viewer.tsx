@@ -20,6 +20,7 @@ import React, {
 import ReactDOM from 'react-dom'
 import { FaExternalLinkAlt, FaTimes } from 'react-icons/fa'
 import { GoSearch } from 'react-icons/go'
+import ReactTooltip from 'react-tooltip'
 import 'viewer.css'
 import { NODE_HEIGHT, NODE_WIDTH } from './constants'
 import type { CustomDiagram as CustomDiagramType, Data, Loc } from './types'
@@ -141,6 +142,8 @@ const CustomNode: CustomNodeType = (props) => {
         width: `${NODE_WIDTH}px`,
       }}
       onDoubleClick={(event) => event.stopPropagation()}
+      data-tip={id}
+      data-for="user-name"
     >
       <div className="customNodeInput">
         {inputs &&
@@ -194,6 +197,7 @@ const CustomNode: CustomNodeType = (props) => {
             })
           )}
       </div>
+      <ReactTooltip id="user-name" />
     </div>
   )
 }
