@@ -84,13 +84,16 @@ div.code-toolbar > .toolbar {
   height: 100%;
   overflow: scroll;
   list-style: none;
-  padding: 20px 20px 0 20px;
+  padding: 12px 20px 0 20px;
   margin: 0;
 }
 .sideNav li {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.sideNavSearch {
+  margin: 20px 20px 0 20px;
 }
 .sideNavItem {
   overflow: hidden;
