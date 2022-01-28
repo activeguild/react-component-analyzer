@@ -6,14 +6,17 @@ import type {
 import 'beautiful-react-diagrams/styles.css'
 import Avatar from 'boring-avatars'
 import classNames from 'classnames'
+import Fuse from 'fuse.js'
 import 'modern-css-reset/dist/reset.min.css'
 import Prism from 'prismjs'
 import React, {
+  ChangeEventHandler,
   ElementType,
   MouseEvent,
   ReactNode,
   useCallback,
   useContext,
+  useMemo,
   useState,
   VFC,
 } from 'react'
@@ -24,6 +27,7 @@ import ReactTooltip from 'react-tooltip'
 import 'viewer.css'
 import { NODE_HEIGHT, NODE_WIDTH } from './constants'
 import type { CustomDiagram as CustomDiagramType, Data, Loc } from './types'
+
 const NavContext = React.createContext<NavContext>({})
 type NavContext = {
   navId?: string
@@ -210,6 +214,7 @@ const Layout: VFC<LayoutProps> = (prpops) => {
   const { state, toggle } = useDrawer()
   const [navId, setNavId] = useState('')
   const sideMenu: string[] = []
+  const [searchTxt, setSearchTxt] = useState('')
 
   for (const node of initialSchema.nodes) {
     node.render = CustomNode
@@ -257,13 +262,35 @@ const Layout: VFC<LayoutProps> = (prpops) => {
     navId,
     setNavId,
   }
+  const fuse = new Fuse(sideMenu, { threshold: 0.3 })
+
+  const search = (searchTxt: string) => {
+    if (!searchTxt) return sideMenu
+
+    const result = fuse.search(searchTxt)
+
+    return result.map(({ item }) => item)
+  }
+
+  const result = useMemo(() => search(searchTxt), [searchTxt])
+  const handleTxtChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+    search(event.target.value)
+    setSearchTxt(event.target.value)
+  }
 
   return (
     <NavContext.Provider value={navContextValue}>
       <Drawer state={state} handleClose={handleClose} />
       <aside className="sideNavContainer">
+        <h3 className="sideNavTitle">Components</h3>
+        <input
+          className="sideNavSearch"
+          type="text"
+          placeholder="Find a component"
+          onChange={handleTxtChange}
+        ></input>
         <ul className="sideNav">
-          {sideMenu.map((id) => (
+          {result.map((id) => (
             <li
               className="sideNavItem"
               key={id}
@@ -277,7 +304,9 @@ const Layout: VFC<LayoutProps> = (prpops) => {
                 colors={['#92A1C6', '#146A7C', '#F0AB3D', '#C271B4', '#C20D90']}
               />
               <a
-                className={classNames('sideNavLink', { active: navId === id })}
+                className={classNames('sideNavLink', {
+                  active: navId === id,
+                })}
                 onClick={(event) => handleMenuClick(event, id)}
               >
                 {id}
