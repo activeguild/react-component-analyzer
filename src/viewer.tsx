@@ -282,10 +282,11 @@ const Layout: VFC<LayoutProps> = (prpops) => {
     <NavContext.Provider value={navContextValue}>
       <Drawer state={state} handleClose={handleClose} />
       <aside className="sideNavContainer">
+        <h3 className="sideNavTitle">Components</h3>
         <input
           className="sideNavSearch"
           type="text"
-          placeholder="Search name"
+          placeholder="Find a component"
           onChange={handleTxtChange}
         ></input>
         <ul className="sideNav">
