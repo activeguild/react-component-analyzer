@@ -9,7 +9,7 @@
 Analyze the component tree of react and displays it as a diagram in the browser.
 You can refer to the corresponding code from the diagram.
 
-![demo.png](https://user-images.githubusercontent.com/39351982/150927581-36ec7f41-1e8d-47c6-bad1-e8c1534ef6a1.png)
+![demo.png](https://user-images.githubusercontent.com/39351982/151506687-66057861-1bf2-4b3e-afdc-6880196ba66f.png)
 
 ## Motivation
 
