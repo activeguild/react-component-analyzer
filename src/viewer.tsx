@@ -273,7 +273,7 @@ const Layout: VFC<LayoutProps> = (prpops) => {
   }
 
   const result = useMemo(() => search(searchTxt), [searchTxt])
-  const handleTxtChange: ChangeEventHandler<any> = (event) => {
+  const handleTxtChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     search(event.target.value)
     setSearchTxt(event.target.value)
   }
