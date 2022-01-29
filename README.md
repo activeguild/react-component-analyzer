@@ -1,4 +1,4 @@
-<h1 align="center">visualize-react-component ⚡ Welcome 😀</h1>
+<h1 align="center">react-component-analyzer ⚡ Welcome 😀</h1>
 
 <p align="left">
   <a href="https://github.com/actions/setup-node"><img alt="GitHub Actions status" src="https://github.com/activeguild/visualize-react-component/workflows/automatic%20release/badge.svg" style="max-width:100%;"></a>
