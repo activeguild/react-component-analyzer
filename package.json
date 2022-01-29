@@ -1,6 +1,6 @@
 {
-  "name": "visualize-react-component",
-  "version": "1.0.43",
+  "name": "react-component-analyzer",
+  "version": "1.0.44",
   "description": "Analyze the component tree of react and displays it as a diagram in the browser. You can refer to the corresponding code from the diagram.",
   "main": "cli.js",
   "scripts": {
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/activeguild/visualize-react-component.git"
+    "url": "git+https://github.com/activeguild/react-component-analyzer.git"
   },
   "keywords": [
     "typescript",
@@ -31,9 +31,9 @@
   "author": "j1ngzoue",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/activeguild/visualize-react-component/issues"
+    "url": "https://github.com/activeguild/react-component-analyzer/issues"
   },
-  "homepage": "https://github.com/activeguild/visualize-react-component#readme",
+  "homepage": "https://github.com/activeguild/react-component-analyzer#readme",
   "devDependencies": {
     "@types/node": "^17.0.6",
     "@types/prismjs": "^1.16.6",
