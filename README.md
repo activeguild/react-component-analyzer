@@ -1,7 +1,7 @@
 <h1 align="center">react-component-analyzer ⚡ Welcome 😀</h1>
 
 <p align="left">
-  <a href="https://github.com/actions/setup-node"><img alt="GitHub Actions status" src="https://github.com/activeguild/visualize-react-component/workflows/automatic%20release/badge.svg" style="max-width:100%;"></a>
+  <a href="https://github.com/actions/setup-node"><img alt="GitHub Actions status" src="https://github.com/activeguild/react-component-analyzer/workflows/automatic%20release/badge.svg" style="max-width:100%;"></a>
 </p>
 
 ## react-component-analyzer
@@ -78,8 +78,8 @@ module.exports = {
 
 ## Principles of conduct
 
-Please see [the principles of conduct](https://github.com/activeguild/visualize-react-component/blob/master/.github/CONTRIBUTING.md) when building a site.
+Please see [the principles of conduct](https://github.com/activeguild/react-component-analyzer/blob/master/.github/CONTRIBUTING.md) when building a site.
 
 ## License
 
-This library is licensed under the [MIT license](https://github.com/activeguild/visualize-react-component/blob/master/LICENSE).
+This library is licensed under the [MIT license](https://github.com/activeguild/react-component-analyzer/blob/master/LICENSE).
