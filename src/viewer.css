@@ -5,6 +5,13 @@ body {
   font-size: 11px;
   background: #282a37;
 }
+input {
+  border: none;
+  border-radius: 2px;
+}
+input:focus {
+  outline: 1px #00ff11 solid;
+}
 .bi.bi-diagram {
   background-color: #282a37 !important;
   overflow: scroll !important;
