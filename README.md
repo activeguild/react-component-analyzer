@@ -4,7 +4,7 @@
   <a href="https://github.com/actions/setup-node"><img alt="GitHub Actions status" src="https://github.com/activeguild/visualize-react-component/workflows/automatic%20release/badge.svg" style="max-width:100%;"></a>
 </p>
 
-## visualize-react-component
+## react-component-analyzer
 
 Analyze the component tree of react and displays it as a diagram in the browser.
 You can refer to the corresponding code from the diagram.
@@ -34,7 +34,7 @@ You can refer to the corresponding code from the diagram.
 ## Install
 
 ```bash
-npm i -D visualize-react-component
+npm i -D react-component-analyzer
 ```
 
 ## Usage
