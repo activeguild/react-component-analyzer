@@ -1,6 +1,7 @@
 import { writeFileSync } from 'fs'
 import path from 'path'
 import pc from 'picocolors'
+import { isServerMode } from './config'
 import { CustomDiagram, Mode } from './types'
 
 export const writeHtml = (mode: Mode, diagram: CustomDiagram): void => {
@@ -16,7 +17,7 @@ const getDiagramJson = (diagram: CustomDiagram): string => {
 
 const makeHtml = (mode: Mode, diagram: CustomDiagram) => {
   const resolveFilePath = (filaPath: string) => {
-    if (mode === 'server') {
+    if (isServerMode(mode)) {
       return path.basename(filaPath)
     }
     return path.resolve(__dirname, filaPath)
