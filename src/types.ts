@@ -4,7 +4,10 @@ import type {
   Node,
 } from 'beautiful-react-diagrams/@types/DiagramSchema'
 
+export type Mode = 'local' | 'server'
+
 export type Config = {
+  mode?: Mode
   vscode?: boolean
   alias?: Alias[]
 }

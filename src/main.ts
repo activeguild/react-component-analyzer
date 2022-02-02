@@ -3,7 +3,7 @@ import type { Link, Node } from 'beautiful-react-diagrams/@types/DiagramSchema'
 import path from 'path'
 import pc from 'picocolors'
 import { analyze } from './analyze'
-import { loadVite, resolveFinalConfig } from './config'
+import { isServerMode, loadVite, resolveFinalConfig } from './config'
 import {
   NEXT_NODE_POSITION_X,
   NEXT_NODE_POSITION_Y,
@@ -76,7 +76,7 @@ export const main = async (fileName: string, config: Config) => {
         data: {
           code,
           title: id,
-          fileName,
+          fileName: isServerMode(finalConfig.mode) ? '' : fileName,
           loc: {
             start: { ...defaultLineColumn },
             end: { ...defaultLineColumn },
@@ -85,10 +85,20 @@ export const main = async (fileName: string, config: Config) => {
       },
     ]
     const links: Link[] = []
-    convertToFinalNode(parentNode, nodes, links, x, y + NEXT_NODE_POSITION_Y)
+    convertToFinalNode(
+      finalConfig,
+      parentNode,
+      nodes,
+      links,
+      x,
+      y + NEXT_NODE_POSITION_Y
+    )
 
     const diagram: CustomDiagram = {
-      vscode: finalConfig.vscode,
+      vscode:
+        finalConfig.vscode && isServerMode(finalConfig.mode)
+          ? false
+          : finalConfig.vscode,
       width: diagramWidth + NEXT_NODE_POSITION_X,
       height: diagramHeight + NEXT_NODE_POSITION_Y,
       schema: {
@@ -97,7 +107,7 @@ export const main = async (fileName: string, config: Config) => {
       },
     }
 
-    writeHtml(diagram)
+    writeHtml(finalConfig.mode, diagram)
   } catch (e) {
     if (e instanceof Error) {
       console.log(pc.red(e.message))
@@ -108,6 +118,7 @@ export const main = async (fileName: string, config: Config) => {
 }
 
 const convertToFinalNode = (
+  finalConfig: Required<Config>,
   parentNode: ExtentionNode,
   nodes: Node<Data>[],
   links: Link[],
@@ -133,9 +144,21 @@ const convertToFinalNode = (
           content,
           disableDrag,
           coordinates: [x, y],
-          data: { code, title: id, fileName, loc },
+          data: {
+            code,
+            title: id,
+            fileName: isServerMode(finalConfig.mode) ? '' : fileName,
+            loc,
+          },
         })
-        x = convertToFinalNode(child, nodes, links, x, y + NEXT_NODE_POSITION_Y)
+        x = convertToFinalNode(
+          finalConfig,
+          child,
+          nodes,
+          links,
+          x,
+          y + NEXT_NODE_POSITION_Y
+        )
       }
       links.push({ input: `${parentNode.id}-output`, output: `${id}-input` })
     }

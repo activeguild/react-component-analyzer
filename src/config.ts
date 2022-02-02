@@ -1,17 +1,20 @@
 import type { ImportDeclaration } from '@typescript-eslint/types/dist/ast-spec'
 import fs from 'fs'
 import path from 'path'
-import { Alias, Config } from './types'
+import { Alias, Config, Mode } from './types'
 
 export const resolveFinalConfig = (config: Config): Required<Config> => {
   const finalConfig: Required<Config> = {
+    mode: 'local',
     vscode: true,
     alias: [],
   }
   if (config) {
+    finalConfig.mode = config.mode || 'local'
     finalConfig.vscode = config.vscode === undefined ? true : config.vscode
     finalConfig.alias = config.alias || []
   }
+
   return finalConfig
 }
 
@@ -56,3 +59,5 @@ export const loadVite = async (): Promise<any> => {
     return
   }
 }
+
+export const isServerMode = (mode: Mode) => mode === 'server'

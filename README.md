@@ -1,13 +1,15 @@
 <h1 align="center">react-component-analyzer ⚡ Welcome 😀</h1>
 
 <p align="left">
-  <a href="https://github.com/actions/setup-node"><img alt="GitHub Actions status" src="https://github.com/activeguild/visualize-react-component/workflows/automatic%20release/badge.svg" style="max-width:100%;"></a>
+  <a href="https://github.com/actions/setup-node"><img alt="GitHub Actions status" src="https://github.com/activeguild/react-component-analyzer/workflows/automatic%20release/badge.svg" style="max-width:100%;"></a>
 </p>
-
-## react-component-analyzer
 
 Analyze the component tree of react and displays it as a diagram in the browser.
 You can refer to the corresponding code from the diagram.
+
+[Demo](https://hardcore-fermat-22326b.netlify.app/)
+
+## Screenshots
 
 ![demo.png](https://user-images.githubusercontent.com/39351982/151507430-aa84e421-f77f-45aa-ba76-76504ebd7610.png)
 
@@ -42,18 +44,19 @@ npm i -D react-component-analyzer
 By specifying the React root file and the component files, it will parse them and output the `stats.html` file.
 
 ```
-npx virot ./src/main.tsx
+npx rca ./src/main.tsx
 ```
 
 ## Config
 
 The following options can be set in the configuration file.
-Prepare a `virot.config.js` file with the following properties.
+Prepare a `rca.config.js` file with the following properties.
 
-| Property | Type    | Description                                                              |
-| -------- | ------- | ------------------------------------------------------------------------ |
-| vscode   | boolean | Use vscode schema to code jump to the target component. (default `true`) |
-| alias    | Array   | Specify multiple aliases for entry points.                               |
+| Property | Type                | Description                                                              |
+| -------- | ------------------- | ------------------------------------------------------------------------ |
+| mode     | `local` or `server` | `local` for local file system. `server` for hosting. (default `local`)   |
+| vscode   | boolean             | Use vscode schema to code jump to the target component. (default `true`) |
+| alias    | Array               | Specify multiple aliases for entry points.                               |
 
 `alias Property`
 | Property | Type | Description |
@@ -78,8 +81,8 @@ module.exports = {
 
 ## Principles of conduct
 
-Please see [the principles of conduct](https://github.com/activeguild/visualize-react-component/blob/master/.github/CONTRIBUTING.md) when building a site.
+Please see [the principles of conduct](https://github.com/activeguild/react-component-analyzer/blob/master/.github/CONTRIBUTING.md) when building a site.
 
 ## License
 
-This library is licensed under the [MIT license](https://github.com/activeguild/visualize-react-component/blob/master/LICENSE).
+This library is licensed under the [MIT license](https://github.com/activeguild/react-component-analyzer/blob/master/LICENSE).
