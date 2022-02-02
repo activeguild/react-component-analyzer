@@ -5,13 +5,16 @@ import { Alias, Config } from './types'
 
 export const resolveFinalConfig = (config: Config): Required<Config> => {
   const finalConfig: Required<Config> = {
+    mode: 'local',
     vscode: true,
     alias: [],
   }
   if (config) {
+    finalConfig.mode = config.mode || 'server'
     finalConfig.vscode = config.vscode === undefined ? true : config.vscode
     finalConfig.alias = config.alias || []
   }
+  console.log(finalConfig)
   return finalConfig
 }
 

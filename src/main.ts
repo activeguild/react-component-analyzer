@@ -76,7 +76,7 @@ export const main = async (fileName: string, config: Config) => {
         data: {
           code,
           title: id,
-          fileName,
+          fileName: finalConfig.mode === 'local' ? fileName : '',
           loc: {
             start: { ...defaultLineColumn },
             end: { ...defaultLineColumn },
@@ -85,10 +85,21 @@ export const main = async (fileName: string, config: Config) => {
       },
     ]
     const links: Link[] = []
-    convertToFinalNode(parentNode, nodes, links, x, y + NEXT_NODE_POSITION_Y)
+    convertToFinalNode(
+      finalConfig,
+      parentNode,
+      nodes,
+      links,
+      x,
+      y + NEXT_NODE_POSITION_Y
+    )
 
     const diagram: CustomDiagram = {
-      vscode: finalConfig.vscode,
+      mode: finalConfig.mode,
+      vscode:
+        finalConfig.vscode && finalConfig.mode === 'local'
+          ? finalConfig.vscode
+          : false,
       width: diagramWidth + NEXT_NODE_POSITION_X,
       height: diagramHeight + NEXT_NODE_POSITION_Y,
       schema: {
@@ -108,6 +119,7 @@ export const main = async (fileName: string, config: Config) => {
 }
 
 const convertToFinalNode = (
+  finalConfig: Required<Config>,
   parentNode: ExtentionNode,
   nodes: Node<Data>[],
   links: Link[],
@@ -133,9 +145,21 @@ const convertToFinalNode = (
           content,
           disableDrag,
           coordinates: [x, y],
-          data: { code, title: id, fileName, loc },
+          data: {
+            code,
+            title: id,
+            fileName: finalConfig.mode === 'local' ? fileName : '',
+            loc,
+          },
         })
-        x = convertToFinalNode(child, nodes, links, x, y + NEXT_NODE_POSITION_Y)
+        x = convertToFinalNode(
+          finalConfig,
+          child,
+          nodes,
+          links,
+          x,
+          y + NEXT_NODE_POSITION_Y
+        )
       }
       links.push({ input: `${parentNode.id}-output`, output: `${id}-input` })
     }

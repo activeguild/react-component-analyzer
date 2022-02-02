@@ -4,7 +4,10 @@ import type {
   Node,
 } from 'beautiful-react-diagrams/@types/DiagramSchema'
 
+type Mode = 'local' | 'server'
+
 export type Config = {
+  mode?: Mode
   vscode?: boolean
   alias?: Alias[]
 }
@@ -40,6 +43,7 @@ export type LoadedFile = {
 export type LineColumn = { line: number; column: number }
 export type Loc = { start: LineColumn; end: LineColumn }
 export type Data = {
+  mode?: Mode
   vscode?: boolean
   code: string
   title: string
@@ -49,6 +53,7 @@ export type Data = {
 }
 
 export type CustomDiagram = {
+  mode: Mode
   vscode: boolean
   width: number
   height: number
