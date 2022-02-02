@@ -7,6 +7,8 @@
 Analyze the component tree of react and displays it as a diagram in the browser.
 You can refer to the corresponding code from the diagram.
 
+[Demo](https://hardcore-fermat-22326b.netlify.app/)
+
 ## Screenshots
 
 ![demo.png](https://user-images.githubusercontent.com/39351982/151507430-aa84e421-f77f-45aa-ba76-76504ebd7610.png)
