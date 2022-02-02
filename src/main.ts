@@ -95,7 +95,6 @@ export const main = async (fileName: string, config: Config) => {
     )
 
     const diagram: CustomDiagram = {
-      mode: finalConfig.mode,
       vscode:
         finalConfig.vscode && isServerMode(finalConfig.mode)
           ? false
