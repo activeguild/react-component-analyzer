@@ -4,10 +4,10 @@
   <a href="https://github.com/actions/setup-node"><img alt="GitHub Actions status" src="https://github.com/activeguild/react-component-analyzer/workflows/automatic%20release/badge.svg" style="max-width:100%;"></a>
 </p>
 
-## react-component-analyzer
-
 Analyze the component tree of react and displays it as a diagram in the browser.
 You can refer to the corresponding code from the diagram.
+
+## Screenshots
 
 ![demo.png](https://user-images.githubusercontent.com/39351982/151507430-aa84e421-f77f-45aa-ba76-76504ebd7610.png)
 
