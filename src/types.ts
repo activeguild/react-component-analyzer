@@ -4,7 +4,7 @@ import type {
   Node,
 } from 'beautiful-react-diagrams/@types/DiagramSchema'
 
-type Mode = 'local' | 'server'
+export type Mode = 'local' | 'server'
 
 export type Config = {
   mode?: Mode
