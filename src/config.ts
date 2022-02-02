@@ -10,7 +10,7 @@ export const resolveFinalConfig = (config: Config): Required<Config> => {
     alias: [],
   }
   if (config) {
-    finalConfig.mode = config.mode || 'server'
+    finalConfig.mode = config.mode || 'local'
     finalConfig.vscode = config.vscode === undefined ? true : config.vscode
     finalConfig.alias = config.alias || []
   }
