@@ -43,7 +43,6 @@ export type LoadedFile = {
 export type LineColumn = { line: number; column: number }
 export type Loc = { start: LineColumn; end: LineColumn }
 export type Data = {
-  mode?: Mode
   vscode?: boolean
   code: string
   title: string
@@ -53,7 +52,6 @@ export type Data = {
 }
 
 export type CustomDiagram = {
-  mode: Mode
   vscode: boolean
   width: number
   height: number

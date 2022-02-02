@@ -39,7 +39,6 @@ const App = () => {
 
   for (const node of initialSchema.nodes) {
     if (node.data) {
-      node.data.mode = diagram.mode
       node.data.vscode = diagram.vscode
       node.inputs = [{ id: `${node.id}-input` }]
       node.outputs = [{ id: `${node.id}-output` }]
