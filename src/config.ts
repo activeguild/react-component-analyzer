@@ -14,7 +14,7 @@ export const resolveFinalConfig = (config: Config): Required<Config> => {
     finalConfig.vscode = config.vscode === undefined ? true : config.vscode
     finalConfig.alias = config.alias || []
   }
-  console.log(finalConfig)
+
   return finalConfig
 }
 
