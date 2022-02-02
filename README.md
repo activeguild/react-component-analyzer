@@ -54,7 +54,7 @@ Prepare a `rca.config.js` file with the following properties.
 
 | Property | Type                | Description                                                              |
 | -------- | ------------------- | ------------------------------------------------------------------------ |
-| mode     | 'local' or 'server' | 'local' for local file system. 'server' for hosting. (default `local`)   |
+| mode     | `local` or `server` | `local` for local file system. `server` for hosting. (default `local`)   |
 | vscode   | boolean             | Use vscode schema to code jump to the target component. (default `true`) |
 | alias    | Array               | Specify multiple aliases for entry points.                               |
 
