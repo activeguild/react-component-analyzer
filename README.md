@@ -42,13 +42,13 @@ npm i -D react-component-analyzer
 By specifying the React root file and the component files, it will parse them and output the `stats.html` file.
 
 ```
-npx virot ./src/main.tsx
+npx rca ./src/main.tsx
 ```
 
 ## Config
 
 The following options can be set in the configuration file.
-Prepare a `virot.config.js` file with the following properties.
+Prepare a `rca.config.js` file with the following properties.
 
 | Property | Type    | Description                                                              |
 | -------- | ------- | ------------------------------------------------------------------------ |
