@@ -76,7 +76,7 @@ export const main = async (fileName: string, config: Config) => {
         data: {
           code,
           title: id,
-          fileName,
+          fileName: finalConfig.vscode ? fileName : '',
           loc: {
             start: { ...defaultLineColumn },
             end: { ...defaultLineColumn },
@@ -95,7 +95,7 @@ export const main = async (fileName: string, config: Config) => {
     )
 
     const diagram: CustomDiagram = {
-      vscode: finalConfig.vscode ? false : finalConfig.vscode,
+      vscode: !finalConfig.vscode ? false : finalConfig.vscode,
       width: diagramWidth + NEXT_NODE_POSITION_X,
       height: diagramHeight + NEXT_NODE_POSITION_Y,
       schema: {
@@ -144,7 +144,7 @@ const convertToFinalNode = (
           data: {
             code,
             title: id,
-            fileName,
+            fileName: finalConfig.vscode ? fileName : '',
             loc,
           },
         })
