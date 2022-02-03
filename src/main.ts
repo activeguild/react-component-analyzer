@@ -3,7 +3,7 @@ import type { Link, Node } from 'beautiful-react-diagrams/@types/DiagramSchema'
 import path from 'path'
 import pc from 'picocolors'
 import { analyze } from './analyze'
-import { isServerMode, loadVite, resolveFinalConfig } from './config'
+import { loadVite, resolveFinalConfig } from './config'
 import {
   NEXT_NODE_POSITION_X,
   NEXT_NODE_POSITION_Y,
@@ -76,7 +76,7 @@ export const main = async (fileName: string, config: Config) => {
         data: {
           code,
           title: id,
-          fileName: isServerMode(finalConfig.mode) ? '' : fileName,
+          fileName,
           loc: {
             start: { ...defaultLineColumn },
             end: { ...defaultLineColumn },
@@ -95,10 +95,7 @@ export const main = async (fileName: string, config: Config) => {
     )
 
     const diagram: CustomDiagram = {
-      vscode:
-        finalConfig.vscode && isServerMode(finalConfig.mode)
-          ? false
-          : finalConfig.vscode,
+      vscode: finalConfig.vscode ? false : finalConfig.vscode,
       width: diagramWidth + NEXT_NODE_POSITION_X,
       height: diagramHeight + NEXT_NODE_POSITION_Y,
       schema: {
@@ -107,7 +104,7 @@ export const main = async (fileName: string, config: Config) => {
       },
     }
 
-    writeHtml(finalConfig.mode, diagram)
+    writeHtml(diagram)
   } catch (e) {
     if (e instanceof Error) {
       console.log(pc.red(e.message))
@@ -147,7 +144,7 @@ const convertToFinalNode = (
           data: {
             code,
             title: id,
-            fileName: isServerMode(finalConfig.mode) ? '' : fileName,
+            fileName,
             loc,
           },
         })

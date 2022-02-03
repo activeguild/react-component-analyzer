@@ -1,12 +1,11 @@
 import { writeFileSync } from 'fs'
 import path from 'path'
 import pc from 'picocolors'
-import { isServerMode } from './config'
-import { CustomDiagram, Mode } from './types'
+import { CustomDiagram } from './types'
 
-export const writeHtml = (mode: Mode, diagram: CustomDiagram): void => {
+export const writeHtml = (diagram: CustomDiagram): void => {
   const outputFilePath = path.resolve(path.resolve(), './stats.html')
-  writeFileSync(outputFilePath, makeHtml(mode, diagram))
+  writeFileSync(outputFilePath, makeHtml(diagram))
   console.log(pc.green(`Success. ${outputFilePath}`))
   return
 }
@@ -15,11 +14,8 @@ const getDiagramJson = (diagram: CustomDiagram): string => {
   return `const diagram =${JSON.stringify(diagram)}`
 }
 
-const makeHtml = (mode: Mode, diagram: CustomDiagram) => {
+const makeHtml = (diagram: CustomDiagram) => {
   const resolveFilePath = (filaPath: string) => {
-    if (isServerMode(mode)) {
-      return path.basename(filaPath)
-    }
     return path.resolve(__dirname, filaPath)
   }
 
