@@ -25,6 +25,7 @@ import { FaExternalLinkAlt, FaTimes } from 'react-icons/fa'
 import { GoSearch } from 'react-icons/go'
 import ReactTooltip from 'react-tooltip'
 import 'viewer.css'
+import { styles } from 'viewer.css'
 import { NODE_HEIGHT, NODE_WIDTH } from './constants'
 import type { CustomDiagram as CustomDiagramType, Data, Loc } from './types'
 
@@ -79,7 +80,7 @@ const Drawer: VFC<DrawerProps> = (props) => {
           }}
         ></code>
       </pre>
-      <a className="drawerClose" onClick={handleClose}>
+      <a className={styles.drawerClose} onClick={handleClose}>
         <FaTimes />
       </a>
     </div>

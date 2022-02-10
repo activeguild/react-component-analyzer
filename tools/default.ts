@@ -1,7 +1,15 @@
 import { vanillaExtractPlugin } from '@vanilla-extract/esbuild-plugin'
 import type { BuildOptions } from 'esbuild'
 import { prismjsPlugin } from 'esbuild-plugin-prismjs'
+import postcss from 'postcss'
 
+const processCss = async (css: string) => {
+  const result = await postcss().process(css, {
+    from: undefined /* suppress source map warning */,
+  })
+
+  return result.css
+}
 export const defaultOptionsForViewer: BuildOptions = {
   entryPoints: ['./src/viewer.tsx'],
   outdir: 'dist',
@@ -10,7 +18,7 @@ export const defaultOptionsForViewer: BuildOptions = {
   format: 'esm',
   target: ['esnext'],
   plugins: [
-    vanillaExtractPlugin(),
+    vanillaExtractPlugin({ processCss }),
     prismjsPlugin({
       languages: ['typescript', 'javascript', 'css', 'markup'],
       plugins: [
