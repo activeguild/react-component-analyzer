@@ -59,12 +59,12 @@ a:hover {
 .drawer.open {
   transform: translateX(0);
 }
-.drawerClose {
+/* .drawerClose {
   position: absolute;
   font-size: 14px;
   top: 8px;
   left: 8px;
-}
+} */
 
 .line-highlight {
   background: linear-gradient(
