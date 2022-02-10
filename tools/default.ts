@@ -1,3 +1,4 @@
+import { vanillaExtractPlugin } from '@vanilla-extract/esbuild-plugin'
 import type { BuildOptions } from 'esbuild'
 import { prismjsPlugin } from 'esbuild-plugin-prismjs'
 
@@ -9,6 +10,7 @@ export const defaultOptionsForViewer: BuildOptions = {
   format: 'esm',
   target: ['esnext'],
   plugins: [
+    vanillaExtractPlugin(),
     prismjsPlugin({
       languages: ['typescript', 'javascript', 'css', 'markup'],
       plugins: [
