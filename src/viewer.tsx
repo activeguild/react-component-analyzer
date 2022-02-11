@@ -203,10 +203,17 @@ const CustomNode: CustomNodeType = (props) => {
       )}
       <div className={styles.customNodeOutput}>
         {outputs &&
-          outputs.map((port: any) =>
-            React.cloneElement(port, {
-              style: { width: '40px', height: '16px', background: '#1B263B' },
-            })
+          outputs.map((port) =>
+            // [Note] https://github.com/antonioru/beautiful-react-diagrams/pull/91
+            React.cloneElement(
+              port as unknown as React.DetailedReactHTMLElement<
+                React.HTMLAttributes<HTMLDivElement>,
+                HTMLDivElement
+              >,
+              {
+                style: { width: '40px', height: '16px', background: '#1B263B' },
+              }
+            )
           )}
       </div>
     </div>
