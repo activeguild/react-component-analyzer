@@ -24,8 +24,10 @@ import ReactDOM from 'react-dom'
 import { FaExternalLinkAlt, FaTimes } from 'react-icons/fa'
 import { GoSearch } from 'react-icons/go'
 import ReactTooltip from 'react-tooltip'
-import 'viewer.css'
+import 'styles/base.css'
+import { styles } from 'styles/viewer.css'
 import { NODE_HEIGHT, NODE_WIDTH } from './constants'
+import './styles/vendor.css'
 import type { CustomDiagram as CustomDiagramType, Data, Loc } from './types'
 
 const NavContext = React.createContext<NavContext>({})
@@ -56,9 +58,9 @@ type DrawerProps = {
 const Drawer: VFC<DrawerProps> = (props) => {
   const { state, handleClose } = props
   const { open, code, loc } = state
-  let className = 'drawer'
+  let className = styles.drawer
   if (open) {
-    className = `${className} open`
+    className = `${className} ${styles.open}`
   }
   setTimeout(() => {
     Prism.highlightAll()
@@ -79,7 +81,7 @@ const Drawer: VFC<DrawerProps> = (props) => {
           }}
         ></code>
       </pre>
-      <a className="drawerClose" onClick={handleClose}>
+      <a className={styles.drawerClose} onClick={handleClose}>
         <FaTimes />
       </a>
     </div>
@@ -135,11 +137,11 @@ const CustomNode: CustomNodeType = (props) => {
   }
   const { navId } = useContext(NavContext)
   const [title, setTitle] = useState(data?.title)
-
+  console.log(inputs)
   return (
     <div
       id={id}
-      className={classNames('customNode', { active: id === navId })}
+      className={classNames(styles.customNode, { active: id === navId })}
       style={{
         height: `${NODE_HEIGHT}px`,
         width: `${NODE_WIDTH}px`,
@@ -148,16 +150,23 @@ const CustomNode: CustomNodeType = (props) => {
       data-tip={id}
       data-for="component-name"
     >
-      <div className="customNodeInput">
+      <div className={styles.customNodeInput}>
         {inputs &&
-          inputs.map((port: any) =>
-            React.cloneElement(port, {
-              style: { width: '40px', height: '16px', background: '#1B263B' },
-            })
+          inputs.map((port) =>
+            // [Note] https://github.com/antonioru/beautiful-react-diagrams/pull/91
+            React.cloneElement(
+              port as unknown as React.DetailedReactHTMLElement<
+                React.HTMLAttributes<HTMLDivElement>,
+                HTMLDivElement
+              >,
+              {
+                style: { width: '40px', height: '16px', background: '#1B263B' },
+              }
+            )
           )}
       </div>
       {data && data.code ? (
-        <div className="customNodeId">{title}</div>
+        <div className={styles.customNodeId}>{title}</div>
       ) : (
         <input
           type="text"
@@ -166,7 +175,7 @@ const CustomNode: CustomNodeType = (props) => {
         />
       )}
       {data && data.code ? (
-        <div className="customNodeToolbar">
+        <div className={styles.customNodeToolbar}>
           <a onClick={handleShowDetail}>
             <GoSearch />
           </a>
@@ -192,12 +201,19 @@ const CustomNode: CustomNodeType = (props) => {
       ) : (
         <></>
       )}
-      <div className="customNodeOutput">
+      <div className={styles.customNodeOutput}>
         {outputs &&
-          outputs.map((port: any) =>
-            React.cloneElement(port, {
-              style: { width: '40px', height: '16px', background: '#1B263B' },
-            })
+          outputs.map((port) =>
+            // [Note] https://github.com/antonioru/beautiful-react-diagrams/pull/91
+            React.cloneElement(
+              port as unknown as React.DetailedReactHTMLElement<
+                React.HTMLAttributes<HTMLDivElement>,
+                HTMLDivElement
+              >,
+              {
+                style: { width: '40px', height: '16px', background: '#1B263B' },
+              }
+            )
           )}
       </div>
     </div>
@@ -281,18 +297,18 @@ const Layout: VFC<LayoutProps> = (prpops) => {
   return (
     <NavContext.Provider value={navContextValue}>
       <Drawer state={state} handleClose={handleClose} />
-      <aside className="sideNavContainer">
-        <h3 className="sideNavTitle">Components</h3>
+      <aside className={styles.sideNavContainer}>
+        <h3 className={styles.sideNavTitle}>Components</h3>
         <input
-          className="sideNavSearch"
+          className={styles.sideNavSearch}
           type="text"
           placeholder="Find a component"
           onChange={handleTxtChange}
         ></input>
-        <ul className="sideNav">
+        <ul className={styles.sideNav}>
           {result.map((id) => (
             <li
-              className="sideNavItem"
+              className={styles.sideNavItem}
               key={id}
               data-tip={id}
               data-for="component-name"
@@ -304,8 +320,8 @@ const Layout: VFC<LayoutProps> = (prpops) => {
                 colors={['#92A1C6', '#146A7C', '#F0AB3D', '#C271B4', '#C20D90']}
               />
               <a
-                className={classNames('sideNavLink', {
-                  active: navId === id,
+                className={classNames(styles.sideNavLink, {
+                  [styles.active]: navId === id,
                 })}
                 onClick={(event) => handleMenuClick(event, id)}
               >
@@ -364,7 +380,7 @@ const CustomDiagram = ({
 
   return (
     <div
-      className="diagramWrapper"
+      className={styles.diagramWrapper}
       style={{
         height: `${customDiagram.height + 1000}px`,
         width: `${customDiagram.width + 1000}px`,
