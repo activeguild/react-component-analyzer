@@ -137,7 +137,7 @@ const CustomNode: CustomNodeType = (props) => {
   }
   const { navId } = useContext(NavContext)
   const [title, setTitle] = useState(data?.title)
-
+  console.log(inputs)
   return (
     <div
       id={id}
@@ -152,10 +152,16 @@ const CustomNode: CustomNodeType = (props) => {
     >
       <div className={styles.customNodeInput}>
         {inputs &&
-          inputs.map((port: any) =>
-            React.cloneElement(port, {
-              style: { width: '40px', height: '16px', background: '#1B263B' },
-            })
+          inputs.map((port) =>
+            React.cloneElement(
+              port as unknown as React.DetailedReactHTMLElement<
+                React.HTMLAttributes<HTMLDivElement>,
+                HTMLDivElement
+              >,
+              {
+                style: { width: '40px', height: '16px', background: '#1B263B' },
+              }
+            )
           )}
       </div>
       {data && data.code ? (
