@@ -1,45 +1,31 @@
-body {
-  font-family: 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ',
-    Meiryo, Osaka, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
-  color: white !important;
-  font-size: 11px;
-  background: #282a37;
-}
-input {
-  border: none;
-  border-radius: 2px;
-}
-input:focus {
-  outline: 1px #00ff11 solid;
-}
-.bi.bi-diagram {
+/* .bi.bi-diagram {
   background-color: #282a37 !important;
   overflow: scroll !important;
   border: none !important;
   box-shadow: none !important;
-}
-.bi.bi-diagram .bi-link-canvas-layer .bi-diagram-link .bi-link-path {
+} */
+/* .bi.bi-diagram .bi-link-canvas-layer .bi-diagram-link .bi-link-path {
   stroke-width: 0.12rem;
   stroke: url(#header-shape-gradient) #fff;
-}
+} */
 #header-shape-gradient {
   --color-stop: #f12c06;
   --color-bot: #faed34;
 }
-a {
+/* a {
   padding: 4px;
   cursor: pointer;
-}
-a + a {
+} */
+/* a + a {
   margin-left: 4px;
-}
-a,
+} */
+/* a,
 a:visited {
   color: white;
-}
-a:hover {
+} */
+/* a:hover {
   opacity: 0.7;
-}
+} */
 .drawer {
   height: 100%;
   background: white;
