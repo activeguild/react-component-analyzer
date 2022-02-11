@@ -26,7 +26,7 @@ a:visited {
 /* a:hover {
   opacity: 0.7;
 } */
-.drawer {
+/* .drawer {
   height: 100%;
   background: white;
   position: fixed;
@@ -41,10 +41,10 @@ a:visited {
   padding-left: 16px;
   padding-top: 18px;
   overflow: scroll;
-}
-.drawer.open {
+} */
+/* .drawer.open {
   transform: translateX(0);
-}
+} */
 /* .drawerClose {
   position: absolute;
   font-size: 14px;
@@ -52,17 +52,17 @@ a:visited {
   left: 8px;
 } */
 
-.line-highlight {
+/* .line-highlight {
   background: linear-gradient(
     to right,
     hsla(124, 120%, 50%, 0.15) 100%,
     hsla(24, 20%, 50%, 0)
   ) !important;
-}
-div.code-toolbar > .toolbar {
+} */
+/* div.code-toolbar > .toolbar {
   top: -4px;
-}
-.sideNavContainer {
+} */
+/* .sideNavContainer {
   display: flex;
   flex-direction: column;
   width: 160px;
@@ -72,44 +72,44 @@ div.code-toolbar > .toolbar {
   top: 0;
   background: #333130;
   z-index: 200;
-}
-.sideNav {
+} */
+/* .sideNav {
   height: 100%;
   overflow: scroll;
   list-style: none;
   padding: 12px 20px 0 20px;
   margin: 0;
-}
-.sideNav li {
+} */
+/* .sideNav li {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-.sideNavTitle {
+} */
+/* .sideNavTitle {
   margin: 20px 20px 0 20px;
   font-weight: bold;
-}
-.sideNavSearch {
+} */
+/* .sideNavSearch {
   margin: 20px 20px 0 20px;
-}
-.sideNavItem {
+} */
+/* .sideNavItem {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-.sideNavLink {
+} */
+/* .sideNavLink {
   margin-left: 8px;
   color: inherit;
 }
 .sideNavLink.active {
   color: #00ff11;
-}
+} */
 
-.diagramWrapper {
+/* .diagramWrapper {
   margin-left: 160px;
-}
+} */
 
-.customNode {
+/* .customNode {
   background: #01060b;
   border-radius: 4px;
   padding: 10px;
@@ -118,34 +118,34 @@ div.code-toolbar > .toolbar {
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 2px 2px 4px #01060b;
-}
-.customNodeInput {
+} */
+/* .customNodeInput {
   margin-top: -10px;
   margin-left: auto;
   margin-right: auto;
   cursor: pointer;
-}
-.customNodeOutput {
+} */
+/* .customNodeOutput {
   margin-bottom: -10px;
   margin-left: auto;
   margin-right: auto;
   cursor: pointer;
-}
-.customNodeInput:hover,
+} */
+/* .customNodeInput:hover,
 .customNodeOutput:hover {
   opacity: 0.7;
-}
-.customNode.active {
+} */
+/* .customNode.active {
   border: solid 1px #00ff11;
-}
+} */
 
-.customNodeId {
+/* .customNodeId {
   color: white;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-}
-
+} */
+/* 
 .customNodeToolbar {
   text-align: right;
-}
+} */

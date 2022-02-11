@@ -27,6 +27,7 @@ import ReactTooltip from 'react-tooltip'
 import 'styles/base.css'
 import { styles } from 'viewer.css'
 import { NODE_HEIGHT, NODE_WIDTH } from './constants'
+import './styles/vendor.css'
 import './styles/viewer.css'
 import type { CustomDiagram as CustomDiagramType, Data, Loc } from './types'
 
@@ -58,9 +59,9 @@ type DrawerProps = {
 const Drawer: VFC<DrawerProps> = (props) => {
   const { state, handleClose } = props
   const { open, code, loc } = state
-  let className = 'drawer'
+  let className = styles.drawer
   if (open) {
-    className = `${className} open`
+    className = `${className} ${styles.open}`
   }
   setTimeout(() => {
     Prism.highlightAll()
@@ -141,7 +142,7 @@ const CustomNode: CustomNodeType = (props) => {
   return (
     <div
       id={id}
-      className={classNames('customNode', { active: id === navId })}
+      className={classNames(styles.customNode, { active: id === navId })}
       style={{
         height: `${NODE_HEIGHT}px`,
         width: `${NODE_WIDTH}px`,
@@ -150,7 +151,7 @@ const CustomNode: CustomNodeType = (props) => {
       data-tip={id}
       data-for="component-name"
     >
-      <div className="customNodeInput">
+      <div className={styles.customNodeInput}>
         {inputs &&
           inputs.map((port: any) =>
             React.cloneElement(port, {
@@ -159,7 +160,7 @@ const CustomNode: CustomNodeType = (props) => {
           )}
       </div>
       {data && data.code ? (
-        <div className="customNodeId">{title}</div>
+        <div className={styles.customNodeId}>{title}</div>
       ) : (
         <input
           type="text"
@@ -168,7 +169,7 @@ const CustomNode: CustomNodeType = (props) => {
         />
       )}
       {data && data.code ? (
-        <div className="customNodeToolbar">
+        <div className={styles.customNodeToolbar}>
           <a onClick={handleShowDetail}>
             <GoSearch />
           </a>
@@ -194,7 +195,7 @@ const CustomNode: CustomNodeType = (props) => {
       ) : (
         <></>
       )}
-      <div className="customNodeOutput">
+      <div className={styles.customNodeOutput}>
         {outputs &&
           outputs.map((port: any) =>
             React.cloneElement(port, {
@@ -283,18 +284,18 @@ const Layout: VFC<LayoutProps> = (prpops) => {
   return (
     <NavContext.Provider value={navContextValue}>
       <Drawer state={state} handleClose={handleClose} />
-      <aside className="sideNavContainer">
-        <h3 className="sideNavTitle">Components</h3>
+      <aside className={styles.sideNavContainer}>
+        <h3 className={styles.sideNavTitle}>Components</h3>
         <input
-          className="sideNavSearch"
+          className={styles.sideNavSearch}
           type="text"
           placeholder="Find a component"
           onChange={handleTxtChange}
         ></input>
-        <ul className="sideNav">
+        <ul className={styles.sideNav}>
           {result.map((id) => (
             <li
-              className="sideNavItem"
+              className={styles.sideNavItem}
               key={id}
               data-tip={id}
               data-for="component-name"
@@ -306,8 +307,8 @@ const Layout: VFC<LayoutProps> = (prpops) => {
                 colors={['#92A1C6', '#146A7C', '#F0AB3D', '#C271B4', '#C20D90']}
               />
               <a
-                className={classNames('sideNavLink', {
-                  active: navId === id,
+                className={classNames(styles.sideNavLink, {
+                  [styles.active]: navId === id,
                 })}
                 onClick={(event) => handleMenuClick(event, id)}
               >
@@ -366,7 +367,7 @@ const CustomDiagram = ({
 
   return (
     <div
-      className="diagramWrapper"
+      className={styles.diagramWrapper}
       style={{
         height: `${customDiagram.height + 1000}px`,
         width: `${customDiagram.width + 1000}px`,
