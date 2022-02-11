@@ -25,10 +25,9 @@ import { FaExternalLinkAlt, FaTimes } from 'react-icons/fa'
 import { GoSearch } from 'react-icons/go'
 import ReactTooltip from 'react-tooltip'
 import 'styles/base.css'
-import { styles } from 'viewer.css'
+import { styles } from 'styles/viewer.css'
 import { NODE_HEIGHT, NODE_WIDTH } from './constants'
 import './styles/vendor.css'
-import './styles/viewer.css'
 import type { CustomDiagram as CustomDiagramType, Data, Loc } from './types'
 
 const NavContext = React.createContext<NavContext>({})
