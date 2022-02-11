@@ -7,7 +7,7 @@
     "build": "rimraf dist && node -r esbuild-register ./tools/build.ts",
     "watch": "rimraf dist && node -r esbuild-register ./tools/watch.ts",
     "eslint": "eslint '**/*.{js,jsx,ts,tsx}' --ignore-path .gitignore",
-    "prettier": "prettier . --write",
+    "prettier": "prettier . --write  --ignore-path .gitignore",
     "prepare": "husky install",
     "lint-staged": "lint-staged"
   },
