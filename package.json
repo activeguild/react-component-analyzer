@@ -20,13 +20,12 @@
   },
   "keywords": [
     "typescript",
-    "visualize",
     "react",
     "component",
     "tree",
     "diagram",
-    "analyze",
-    "parse"
+    "visualize",
+    "analyze"
   ],
   "author": "j1ngzoue",
   "license": "MIT",
