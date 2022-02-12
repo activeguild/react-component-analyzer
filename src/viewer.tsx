@@ -136,7 +136,7 @@ const CustomNode: CustomNodeType = (props) => {
   }
   const { navId } = useContext(NavContext)
   const [title, setTitle] = useState(data?.title)
-  console.log(inputs)
+
   return (
     <div
       id={id}
