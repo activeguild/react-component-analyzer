@@ -104,7 +104,7 @@ export const main = async (fileName: string, config: Config) => {
       },
     }
 
-    writeHtml(diagram)
+    writeHtml(diagram, finalConfig)
   } catch (e) {
     if (e instanceof Error) {
       console.log(pc.red(e.message))

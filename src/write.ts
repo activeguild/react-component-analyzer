@@ -1,10 +1,15 @@
 import { readFileSync, writeFileSync } from 'fs'
 import path from 'path'
 import pc from 'picocolors'
-import { CustomDiagram } from './types'
+import { Config, CustomDiagram } from './types'
 
-export const writeHtml = (diagram: CustomDiagram): void => {
-  const outputFilePath = path.resolve(path.resolve(), './stats.html')
+export const writeHtml = (
+  diagram: CustomDiagram,
+  config: Required<Config>
+): void => {
+  const outputFilePath = config.outputPath
+    ? config.outputPath
+    : path.resolve(path.resolve(), './stats.html')
   const viewerJsAsString = readFileSync(
     path.resolve(__dirname, './viewer.js')
   ).toString()
