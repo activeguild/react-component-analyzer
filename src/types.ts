@@ -7,6 +7,7 @@ import type {
 export type Config = {
   vscode?: boolean
   alias?: Alias[]
+  outputPath?: string
 }
 
 export type Alias = {

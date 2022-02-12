@@ -1,6 +1,6 @@
 {
   "name": "react-component-analyzer",
-  "version": "1.0.49",
+  "version": "1.0.50",
   "description": "Analyze the component tree of react and displays it as a diagram in the browser. You can refer to the corresponding code from the diagram.",
   "main": "cli.js",
   "scripts": {
@@ -40,6 +40,7 @@
     "@types/react-dom": "^17.0.11",
     "@typescript-eslint/eslint-plugin": "^5.11.0",
     "@typescript-eslint/parser": "^5.11.0",
+    "@ubie/ubie-icons": "^0.1.4",
     "@vanilla-extract/css": "^1.6.8",
     "@vanilla-extract/esbuild-plugin": "^2.0.2",
     "beautiful-react-diagrams": "^0.5.1",
@@ -60,7 +61,6 @@
     "prismjs": "^1.26.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-icons": "^4.3.1",
     "react-tooltip": "^4.2.21",
     "rimraf": "^3.0.2",
     "typescript": "^4.5.5"

@@ -7,10 +7,12 @@ export const resolveFinalConfig = (config: Config): Required<Config> => {
   const finalConfig: Required<Config> = {
     vscode: true,
     alias: [],
+    outputPath: '',
   }
   if (config) {
     finalConfig.vscode = config.vscode === undefined ? true : config.vscode
     finalConfig.alias = config.alias || []
+    finalConfig.outputPath = config.outputPath || ''
   }
 
   return finalConfig
