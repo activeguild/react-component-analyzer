@@ -1,3 +1,4 @@
+import { BlanckLink, CloseA, Search } from '@ubie/ubie-icons'
 import Diagram, { createSchema, useSchema } from 'beautiful-react-diagrams'
 import type {
   DiagramSchema,
@@ -21,8 +22,6 @@ import React, {
   VFC,
 } from 'react'
 import ReactDOM from 'react-dom'
-import { FaExternalLinkAlt, FaTimes } from 'react-icons/fa'
-import { GoSearch } from 'react-icons/go'
 import ReactTooltip from 'react-tooltip'
 import 'styles/base.css'
 import { styles } from 'styles/viewer.css'
@@ -82,7 +81,7 @@ const Drawer: VFC<DrawerProps> = (props) => {
         ></code>
       </pre>
       <a className={styles.drawerClose} onClick={handleClose}>
-        <FaTimes />
+        <CloseA />
       </a>
     </div>
   )
@@ -177,7 +176,7 @@ const CustomNode: CustomNodeType = (props) => {
       {data && data.code ? (
         <div className={styles.customNodeToolbar}>
           <a onClick={handleShowDetail}>
-            <GoSearch />
+            <Search />
           </a>
 
           {data && data.vscode ? (
@@ -192,7 +191,7 @@ const CustomNode: CustomNodeType = (props) => {
                 }
               }}
             >
-              <FaExternalLinkAlt />
+              <BlanckLink />
             </a>
           ) : (
             <></>
