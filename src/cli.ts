@@ -9,7 +9,6 @@ program.parse(process.argv)
 
 if (program.args[0]) {
   let config = null
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
   try {
     config = require(path.resolve(path.resolve(), CONFIG_FILE_NAME))
   } catch (event) {
