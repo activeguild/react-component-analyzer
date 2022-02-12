@@ -39,7 +39,7 @@ const makeHtml = (
   <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title></title>
+    <title>react component analyzer</title>
     <style>${viewerCssAsString}</style>
     <script>
     ${getDiagramJson(diagram)}
