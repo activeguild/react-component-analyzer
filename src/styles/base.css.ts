@@ -24,10 +24,6 @@ globalStyle('a', {
   cursor: 'pointer',
 })
 
-globalStyle('a + a', {
-  marginLeft: '4px',
-})
-
 globalStyle('a, a:visited', {
   color: 'white',
 })
