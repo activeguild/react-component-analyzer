@@ -11,7 +11,6 @@ globalStyle(
   '.bi.bi-diagram .bi-link-canvas-layer .bi-diagram-link .bi-link-path',
   {
     strokeWidth: '0.12rem',
-    stroke: 'url(#header-shape-gradient) #fff',
   }
 )
 
