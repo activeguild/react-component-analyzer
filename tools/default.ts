@@ -4,7 +4,6 @@ import { prismjsPlugin } from 'esbuild-plugin-prismjs'
 import postcss from 'postcss'
 
 const processCss = async (css: string) => {
-  console.log('css :>> ', css)
   const result = await postcss().process(css)
 
   return result.css
