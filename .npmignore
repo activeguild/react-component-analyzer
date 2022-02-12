@@ -6,3 +6,4 @@ tools
 tsconfig.json
 .eslintrc.js
 .prettierrc.js
+.husky
