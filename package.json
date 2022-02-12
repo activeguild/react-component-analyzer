@@ -33,6 +33,9 @@
     "url": "https://github.com/activeguild/react-component-analyzer/issues"
   },
   "homepage": "https://github.com/activeguild/react-component-analyzer#readme",
+  "engines": {
+    "node": "^16.14.0"
+  },
   "devDependencies": {
     "@types/node": "^17.0.17",
     "@types/prismjs": "^1.26.0",
