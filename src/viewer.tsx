@@ -1,4 +1,4 @@
-import { BlanckLink, CloseA, Search } from '@ubie/ubie-icons'
+import { BlankLinkIcon, CloseAIcon, SearchIcon } from '@ubie/ubie-icons'
 import Diagram, { createSchema, useSchema } from 'beautiful-react-diagrams'
 import type {
   DiagramSchema,
@@ -81,7 +81,7 @@ const Drawer: VFC<DrawerProps> = (props) => {
         ></code>
       </pre>
       <a className={styles.drawerClose} onClick={handleClose}>
-        <CloseA />
+        <CloseAIcon />
       </a>
     </div>
   )
@@ -176,7 +176,7 @@ const CustomNode: CustomNodeType = (props) => {
       {data && data.code ? (
         <div className={styles.customNodeToolbar}>
           <a onClick={handleShowDetail}>
-            <Search />
+            <SearchIcon />
           </a>
 
           {data && data.vscode ? (
@@ -191,7 +191,7 @@ const CustomNode: CustomNodeType = (props) => {
                 }
               }}
             >
-              <BlanckLink />
+              <BlankLinkIcon />
             </a>
           ) : (
             <></>
