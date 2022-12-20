@@ -15,14 +15,14 @@ import React, {
   ElementType,
   MouseEvent,
   ReactNode,
+  VFC,
   useCallback,
   useContext,
   useMemo,
   useState,
-  VFC,
 } from 'react'
 import ReactDOM from 'react-dom'
-import ReactTooltip from 'react-tooltip'
+import { Tooltip } from 'react-tooltip'
 import 'styles/base.css'
 import { styles } from 'styles/viewer.css'
 import { NODE_HEIGHT, NODE_WIDTH } from './constants'
@@ -334,7 +334,7 @@ const Layout: VFC<LayoutProps> = (prpops) => {
         customDiagram={customSchema}
         initialSchema={initialSchema}
       />
-      <ReactTooltip id="component-name" />
+      <Tooltip id="component-name" />
     </NavContext.Provider>
   )
 }
