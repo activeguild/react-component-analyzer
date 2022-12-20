@@ -13,9 +13,9 @@ import Prism from 'prismjs'
 import React, {
   ChangeEventHandler,
   ElementType,
+  FC,
   MouseEvent,
   ReactNode,
-  VFC,
   useCallback,
   useContext,
   useMemo,
@@ -54,7 +54,7 @@ type DrawerProps = {
   state: DrawerState
   handleClose: () => void
 }
-const Drawer: VFC<DrawerProps> = (props) => {
+const Drawer: FC<DrawerProps> = (props) => {
   const { state, handleClose } = props
   const { open, code, loc } = state
   let className = styles.drawer
@@ -224,8 +224,8 @@ type LayoutProps = {
   initialSchema: DiagramSchema<Data>
 }
 
-const Layout: VFC<LayoutProps> = (prpops) => {
-  const { customSchema, initialSchema } = prpops
+const Layout: FC<LayoutProps> = (props) => {
+  const { customSchema, initialSchema } = props
   const { state, toggle } = useDrawer()
   const [navId, setNavId] = useState('')
   const sideMenu: string[] = []
