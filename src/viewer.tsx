@@ -18,7 +18,9 @@ import React, {
   ReactNode,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react'
 import ReactDOM from 'react-dom'
@@ -143,7 +145,7 @@ const CustomNode: CustomNodeType = (props) => {
       className={classNames(styles.customNode, { active: id === navId })}
       style={{
         height: `${NODE_HEIGHT}px`,
-        width: `${NODE_WIDTH}px`,
+        width: `100%`,
       }}
       onDoubleClick={(event) => event.stopPropagation()}
       data-tip={id}
@@ -339,6 +341,14 @@ const Layout: FC<LayoutProps> = (props) => {
   )
 }
 
+const isHtmlDivElement = (element: Element): element is HTMLDivElement => {
+  if (element.nodeName === 'DIV') {
+    return true
+  }
+
+  return false
+}
+
 const CustomDiagram = ({
   customDiagram,
   initialSchema,
@@ -348,6 +358,37 @@ const CustomDiagram = ({
 }) => {
   const [schema, { onChange }] = useSchema<any>(initialSchema)
   const [addCount, setAddCount] = useState<number>(1)
+  const [visibility, setVisibility] = useState<any>('hidden')
+
+  const refDiagram = useRef(null)
+  const cb: IntersectionObserverCallback = (entries) => {
+    const diagramNodes = entries[0].target.querySelectorAll('.bi-diagram-node')
+    if (diagramNodes) {
+      console.log('chema.node :>> ', schema.nodes)
+
+      for (let i = 0; i < diagramNodes.length; i++) {
+        const diagramNode = diagramNodes[i]
+
+        const width =
+          diagramNode.clientWidth <= NODE_WIDTH
+            ? NODE_WIDTH
+            : diagramNode.clientWidth
+
+        const [oldPositionX, oldPositionY] = schema.nodes[i].coordinates
+        const positionX =
+          width === NODE_WIDTH
+            ? oldPositionX
+            : oldPositionX + width - diagramNode.clientWidth
+
+        schema.nodes[i].coordinates = [positionX, oldPositionY]
+      }
+
+      onChange({
+        ...schema,
+        nodes: [...schema.nodes],
+      })
+    }
+  }
 
   const handleBackgroundDoubleClick: React.MouseEventHandler<HTMLDivElement> = (
     event
@@ -377,14 +418,25 @@ const CustomDiagram = ({
     setAddCount(addCount + 1)
   }
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(cb)
+    if (refDiagram.current) observer.observe(refDiagram.current)
+    setVisibility('visible')
+    return () => {
+      if (refDiagram.current) observer.unobserve(refDiagram.current)
+    }
+  }, [refDiagram, setVisibility])
+
   return (
     <div
       className={styles.diagramWrapper}
       style={{
         height: `${customDiagram.height + 1000}px`,
         width: `${customDiagram.width + 1000}px`,
+        visibility,
       }}
       onDoubleClick={handleBackgroundDoubleClick}
+      ref={refDiagram}
     >
       <Diagram schema={schema} onChange={onChange} />
     </div>
